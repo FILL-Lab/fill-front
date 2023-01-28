@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/static/css/main.21a955e6.css",
+    "main.js": "/static/js/main.a1e37212.js",
+    "static/js/787.28cb0dcd.chunk.js": "/static/js/787.28cb0dcd.chunk.js",
+    "static/media/fill.gif": "/static/media/fill.45d208dbd489e3513c08.gif",
+    "static/media/Deposit.svg": "/static/media/Deposit.c102472044477b99ed9d559aa26bd6ed.svg",
+    "static/media/Barlow-Bold.ttf": "/static/media/Barlow-Bold.8247eaeb0799c0acafc6.ttf",
+    "static/media/repay.svg": "/static/media/repay.ce8914d2cb5afce87598525433e577f9.svg",
+    "static/media/Withdraw.svg": "/static/media/Withdraw.d7e8395155738243260f6cd40a808821.svg",
+    "static/media/Borrow.svg": "/static/media/Borrow.939da51dd6710fb7d861e3b0eab4310d.svg",
+    "static/media/holders.webp": "/static/media/holders.063170c140a088d29ef1.webp",
+    "index.html": "/index.html",
+    "main.21a955e6.css.map": "/static/css/main.21a955e6.css.map",
+    "main.a1e37212.js.map": "/static/js/main.a1e37212.js.map",
+    "787.28cb0dcd.chunk.js.map": "/static/js/787.28cb0dcd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.21a955e6.css",
+    "static/js/main.a1e37212.js"
+  ]
+}
