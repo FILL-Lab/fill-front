@@ -1,0 +1,80 @@
+.fill-app{
+    background-color: #000;
+    color: #fff;
+    .main{
+        display: flex;
+         border-top: 1px solid rgba(255,255,255,0.12);
+        height: 100%;
+        width: 100%;
+        .menu{
+            width: 200px;
+            text-align: center;
+            padding-top: 30px;
+        }
+        .content{
+            display: flex;
+        flex: 1;
+    }
+    }
+    
+}
+.fill-btn{
+    width: max-content;
+    padding: 8px 15px;
+    color: #fff;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color:#00E892;
+    border: 1px solid #00E892;
+    &:hover{
+        color: #fff !important;
+        background-color: #00E892;
+        border: 1px solid #00E892 !important;
+    }
+}
+
+.account-card{
+    width: 50%;
+    padding: 15px 30px;
+    background: linear-gradient(180deg, #1A1A1A 0%, #0F0F0F 52%, #1A1A1A 100%);
+    border-radius: 14px;
+    .title{
+        font-size: 32px;
+        font-family: Barlow-Bold, Barlow;
+        font-weight: bold;
+        color: #fff;
+    }
+    .title-item{
+        font-size: 22px;
+font-family: Barlow-Bold, Barlow;
+font-weight: bold;
+color: #FEFFFF;
+    }
+    .value{
+        font-size: 22px;
+        font-family: Barlow-Bold, Barlow;
+        font-weight: bold;
+        color: #00ED89;
+    }
+    .balance{
+        display: flex;
+        justify-content: space-between;
+        &-item{
+            width: 50%;
+            text-align: left;
+        }
+        
+    }
+}
+
+.chart-list{
+    width: 50%;
+    padding: 15px 30px;
+}
+
+
+.icon{
+    font-size: 16px;
+}
