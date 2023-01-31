@@ -43,7 +43,7 @@ export default () => {
         <div className='calc-content'>
           {calcList.map((item) => {
             return (
-              <div className='calc-item'>
+              <div className='calc-item' key={item.key}>
                 <span className='title'>{item.title}</span>
                 <Input className='app-input calc-input' />
               </div>

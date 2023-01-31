@@ -4,6 +4,7 @@
 // 链接钱包
 import Web3 from 'web3';
 import Fill from '../server/FILL.json'
+import * as ethers from 'ethers';
 
 
 // 登录
@@ -78,7 +79,31 @@ const send = async () =>{
     //       console.log(error);
     //     }
     //   });
-    } 
+} 
+    
+
+const setDeposit = async (value: number | string) => {
+    let contractAbi  = JSON.parse(JSON.stringify(Fill.abi));
+        const provider = new ethers.providers.Web3Provider(window.ethereum)
+        const signer = provider.getSigner()
+        const num = Number(value)
+        const contract_ethers = new ethers.Contract('0x52D32b00DFd3844e090A4540e108bbc20f476a1F', contractAbi, signer)
+      const rr = await contract_ethers.deposit(num, {
+          gasLimit: 3000000,
+          value:num
+      })
+        console.log('=rr===33',rr)
 
 
-export {loginMarck }
+        // console.log('===223',this.account)
+        // this.myContract.methods.deposit(Number(value)).send({
+        //     from: this.account,
+        //     gas: 3000000,
+        //     value:Number(value)
+        // }).on('receipt', (data:any) => {
+        //     console.log('====2=22',data)
+        // })
+     }
+
+
+export {loginMarck ,setDeposit}

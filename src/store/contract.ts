@@ -3,6 +3,7 @@ import { resolve } from 'path/posix';
 import Web3 from 'web3';
 import { balancesList, MarketPlaceContract } from '../app_contants';
 import Fill from '../server/FILL.json'
+import * as ethers from 'ethers';
 
 const web3 = new Web3(window.ethereum);
 class contract {
@@ -20,7 +21,6 @@ class contract {
    
 
     getAccountBalance() {
-        console.log('===3', this.accountBalance)
         return this.accountBalance
     }
     // get banlance
@@ -47,6 +47,7 @@ class contract {
                         new Promise((resolve) => {
                             web3.eth.getBalance(this.account).then((res) => { 
                                 const balance = getValueDivide(Number(res), 18)
+                                this.accountBalance= balance;
                                 resolve(balance)
                             })
                         }))
@@ -63,7 +64,29 @@ class contract {
             })
              })  
         }
-    }
+     }
+    
+    async setDeposit (value: number | string) {
+        const provider = new ethers.providers.Web3Provider(window.ethereum)
+        const signer = provider.getSigner()
+        const num = Number(value)
+        const contract_ethers = new ethers.Contract(this.contractAddress, this.contractAbi, signer)
+      const rr = await contract_ethers.deposit(num, {
+          gasLimit: 3000000,
+          value:num
+      })
+        console.log('=rr===33',rr)
+
+
+        // console.log('===223',this.account)
+        // this.myContract.methods.deposit(Number(value)).send({
+        //     from: this.account,
+        //     gas: 3000000,
+        //     value:Number(value)
+        // }).on('receipt', (data:any) => {
+        //     console.log('====2=22',data)
+        // })
+     }
 }
  
 

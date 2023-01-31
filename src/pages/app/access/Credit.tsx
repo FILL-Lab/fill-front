@@ -3,11 +3,16 @@
 import { Divider, Input, Modal } from "antd";
 import { useState } from "react";
 import Calc from "@/components/calc";
+import Contract from "@/store/contract";
 export default () => {
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
+  const [value, setValue] = useState("");
 
+  // const balance =
   const handleConfirm = () => {
+    console.log("---2", value);
     console.log("handleConfirm");
+    Contract.setDeposit(value);
   };
   return (
     <>
@@ -43,12 +48,16 @@ export default () => {
         <div className='modal-content'>
           <div>Borrowing amount:</div>
           <Input
+            value={value}
+            onChange={(e) => {
+              setValue(e.target.value);
+            }}
             className='app-input app-inputNumber access-input'
             placeholder='Enter the amount you want to lend'
           />
           <p className='detail'>
             <Calc />
-            <span> Max：1000.0000 FIL</span>
+            <span> Max:0 FIL</span>
           </p>
         </div>
       </Modal>
