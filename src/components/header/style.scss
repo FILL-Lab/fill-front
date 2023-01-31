@@ -7,3 +7,17 @@
         font-size: 30px;
     }
 }
+.out-content{
+    list-style: none;
+    display: flex;
+    color: #fff;
+    font-size: 18px;
+    padding: 0px 40px 0px 10px;
+    .out-item{
+        line-height: 22px;
+        cursor: pointer;
+        &:hover{
+            color: #00ED89;
+        }
+    }
+}

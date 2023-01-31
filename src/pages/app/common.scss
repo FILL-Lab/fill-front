@@ -1,0 +1,131 @@
+.tabs-list{
+    color: #fff;
+    font-size: 22px;
+    font-family: Barlow-Bold, Barlow;
+     padding-left: 30px;
+    .ant-tabs-tab{
+    font-size: 22px;
+    &:hover{
+        color: #00E892 !important;
+    }
+    }
+    .ant-tabs-tab-active{
+        .ant-tabs-tab-btn{
+            color: #00E892 !important;
+        }
+    }
+    .ant-tabs-ink-bar{
+        background-color: #00E892 !important;
+    }
+}
+.icon{
+    font-size: 16px;
+}
+
+.fill-btn{
+    width: max-content;
+    padding: 8px 15px;
+    color: #fff;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color:#00E892;
+    border: 1px solid #00E892;
+    &:hover{
+        color: #fff !important;
+        background-color: #00E892;
+        border: 1px solid #00E892 !important;
+    }
+}
+.fill-btn-border{
+     display: flex;
+    align-items: center;
+    justify-content: center;
+     padding: 8px 15px;
+     width: max-content;
+     font-size: 14px;
+    background-color: transparent;
+        border: 1px solid #00E892;
+  &:hover{
+        color: #fff !important;
+        background-color: transparent !important;
+        border: 1px solid #00E892 !important;
+    }
+}
+
+.app-modal-wrap{
+    font-family: Barlow-Bold, Barlow;
+    .ant-modal-content{
+    background: linear-gradient(180deg, #1A1A1A 0%, #0F0F0F 52%, #1A1A1A 100%);
+    color: #fff;
+    .ant-modal-header{
+         background: transparent;
+         text-align: center;
+        .ant-modal-title{
+        color: #fff;
+        font-size: 32px;
+        }
+           
+
+    }
+    .ant-modal-close-x{
+        color: #00E892;
+    }
+    }
+}
+
+.pop-wrap{
+    color: #fff;
+    .ant-popover-arrow{
+        &::before{
+             background: linear-gradient(180deg, #1A1A1A 0%, #0F0F0F 52%, #1A1A1A 100%);
+        }
+    }
+    .ant-popover-content{
+        .ant-popover-inner{
+            color: #fff;
+        background: linear-gradient(180deg, #1A1A1A 0%, #0F0F0F 52%, #1A1A1A 100%);
+        }
+    }
+}
+
+.app-input{
+    width: 100%;
+    border-color:rgba(255,255,255,0.2);
+    color: #fff;
+    height: 50px;
+    background: linear-gradient(180deg, #1A1A1A 0%, #0F0F0F 52%, #1A1A1A 100%);
+    &:hover,&:focus,&:active{
+        border-color: #00E892;
+    }
+    &::placeholder{
+         color: #FBFFFE;
+        opacity: 0.6;
+    }
+   
+}
+.app-inputNumber{
+ .ant-input-number-input-wrap{
+         height: 50px;
+         color: #fff;
+    }
+    .ant-input-number-input{
+        width: 100%;
+        height: 100%;
+        color:#fff ;
+    }
+    .ant-input-number-handler-wrap{
+        display: none;
+    }
+}
+.wallet-item{
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    cursor: pointer;
+    &:hover{
+        color: #00E892;
+    }
+}

@@ -1,11 +1,14 @@
 /** @format */
 
 import { useEffect } from "react";
-import Header from "../../components/header";
+import Header from "@/components/header";
+import Wallet from "@/components/wallet";
 import Account from "./account";
-import { loginMarck } from "../../store/server";
+import { loginMarck } from "@/store/server";
 import "./style.scss";
+import "./common.scss";
 import Chart from "./Charts";
+import Access from "./access";
 export default () => {
   console.log("====2");
   useEffect(() => {
@@ -19,7 +22,9 @@ export default () => {
         <div className='content'>
           <Account />
           <Chart />
+          <Access />
         </div>
+        <Wallet />
       </div>
 
       {/* <input type='text' id='toAddress' placeholder='to transfer address' />
