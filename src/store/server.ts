@@ -15,7 +15,8 @@ if (!window.ethereum) {
     return new Promise((resove, reject) => {
         window?.ethereum
         .request({ method: "eth_requestAccounts" })
-        .then((res: any) => {  
+          .then((res: any) => {  
+          console.log('=====333',res)
            resove(res)   
         });
      })

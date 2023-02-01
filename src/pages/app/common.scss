@@ -130,3 +130,22 @@
         color: #00E892;
     }
 }
+
+
+//ant-notification
+.app-notic{
+     background: linear-gradient(180deg, #1A1A1A 0%, #0F0F0F 52%, #1A1A1A 100%);
+      border:1px solid rgba(255,255,255,0.2);
+      color: #00E892;
+    .ant-notification-notice-description{
+        font-size: 16px;
+        }
+        .ant-notification-notice-close{
+            color: #00E892;
+            font-size: 16px;
+            top: 6px;
+            &:hover{
+                color: #00E892;
+            }
+        }
+}

@@ -4,6 +4,11 @@ import { useState } from "react";
 import { itemsChart } from "@/app_contants";
 import Charts from "@/components/charts";
 
+const seriesObj = {
+  type: "line",
+  areaStyle: undefined,
+};
+
 export default () => {
   const [tab, setTab] = useState<string>("1");
   const optiosnList: Record<string, any> = {
@@ -15,19 +20,16 @@ export default () => {
         right: "6%",
         bottom: "10%",
       },
-
       xAxis: {
         type: "category",
         boundaryGap: false,
         data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
       },
-      yAxis: {
-        type: "value",
-      },
+
       series: [
         {
           data: [820, 932, 901, 934, 1290, 1330, 1320],
-          type: "line",
+          ...seriesObj,
           areaStyle: {},
         },
       ],
@@ -37,13 +39,11 @@ export default () => {
         type: "category",
         data: ["1-1", "1-2", "1-3", "1-5", "1-6", "1-7", "1-8", "1-9"],
       },
-      yAxis: {
-        type: "value",
-      },
+
       series: [
         {
-          data: [140, 110, 100, 90, 70, 30, 10, 0],
-          type: "line",
+          data: [140, 110, 80, 90, 70, 10, 10, 0],
+          ...seriesObj,
         },
       ],
     },
@@ -52,13 +52,11 @@ export default () => {
         type: "category",
         data: ["1-1", "1-2", "1-3", "1-5", "1-6", "1-7", "1-8", "1-9"],
       },
-      yAxis: {
-        type: "value",
-      },
+
       series: [
         {
           data: [140, 110, 100, 90, 70, 30, 10, 0],
-          type: "line",
+          ...seriesObj,
         },
       ],
     },
@@ -77,7 +75,7 @@ export default () => {
           return {
             label: value.label,
             key: value.key,
-            children: <Charts propsOption={optiosnList[tab]} />,
+            children: <Charts propsOption={{ ...optiosnList[tab] }} />,
           };
         })}
         onChange={onChange}

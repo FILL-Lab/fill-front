@@ -2,7 +2,7 @@
 
 import Contract from "@/store/contract";
 import { rootState } from "@/type";
-import { Input } from "antd";
+import { Input, notification } from "antd";
 import { useEffect, useState } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 export default ({ data }: { data: { key: string; label: string } }) => {
@@ -14,7 +14,9 @@ export default ({ data }: { data: { key: string; label: string } }) => {
   );
 
   const handleClick = () => {
-    Contract.access(value, data.key);
+    if (value && Number(value)) {
+      Contract.access(value, data.key);
+    }
   };
 
   return (

@@ -49,6 +49,8 @@ export default (props: Props) => {
     // 3. 定义数据
     const option = {
       backgroundColor: "transparent",
+      color: "#00ED89",
+      tooltip: {},
       grid: {
         top: 15,
         left: "6%",

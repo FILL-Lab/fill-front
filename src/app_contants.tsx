@@ -51,7 +51,7 @@ export const accessList: Array<ITEM> = [
     label: `Deposit`,
   },
   {
-    key: "withdraw",
+    key: "redeem",
     label: `Withdraw`,
   },
 ];

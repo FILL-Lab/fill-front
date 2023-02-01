@@ -2,6 +2,8 @@ import { getValueDivide, getValueMultiplied } from '@/utils';import Web3 from 'w
 import { balancesList, MarketPlaceContract } from '@/app_contants';
 import Fill from '@/server/FILL.json'
 import store from './modules'
+import { Button, notification } from 'antd';
+
 
 const web3 = new Web3(window.ethereum);
 
@@ -14,9 +16,10 @@ class contract {
     rate: number;
     constructor() {
         this.contractAbi = JSON.parse(JSON.stringify(Fill.abi));
-        this.contractAddress = MarketPlaceContract || '0x52D32b00DFd3844e090A4540e108bbc20f476a1F';
+        this.contractAddress = MarketPlaceContract || '0x93990056eF7466eA8fDa44fbA728A9560425C10a';
+        console.log('====22',this.contractAddress)
         this.myContract = new web3.eth.Contract(this.contractAbi, this.contractAddress);
-        this.rate =1
+        this.rate = 1
     }
 
 
@@ -31,13 +34,13 @@ class contract {
     // get banlance
      getBalance(acc: string,type?:string) {
         this.account = acc ;
-        let promiseArray: Array<any> = [];
+         let promiseArray: Array<any> = [];
         for (const balancesItem of balancesList) {
             switch (balancesItem.key) {
                   case 'FIL':
                      promiseArray.push(
                         new Promise((resolve) => {
-                            web3.eth.getBalance(this.account).then((res) => { 
+                            web3.eth.getBalance('0x5C045CFAfE8387a98eccaCAcCd24b852E95624Ee').then((res) => {
                                 const balance = getValueDivide(Number(res), 18,4)
                                 this.accountBalance = res;
                                  if (type === "FIL") { 
@@ -91,7 +94,7 @@ class contract {
     //存取
     access(value: string | number, type: string) { 
         const number =getValueMultiplied(Number(value),18)
-        this.myContract.methods[type](number).send({
+        this.myContract.methods[type](number,1,1).send({
             from: this.account,
             value:number
          },
@@ -102,6 +105,21 @@ class contract {
          }) .on('receipt', (data: any) => {
              console.log('receipt success', data)
              // 存 或 取成功
+             const typeStr = type === 'deposit' ? 'Deposit' : ''
+             const returnValue = data.events[typeStr].returnValues;
+             // 转变了多少的 FLE/FIL
+             const value = getValueDivide(Number(returnValue[2]), 18)
+                          console.log('----3', value,returnValue)
+            notification.open({
+                message: "",
+                description: `Your deposit is completed, get ${value} FLE`,
+                duration: null,
+                className: "app-notic",
+                onClick: () => {
+                    console.log("Notification Clicked!");
+                },
+                });
+             
             this.getBalance(this.account)
             
         })
@@ -114,6 +132,7 @@ class contract {
          })
     }
     
+
 
     
 }
