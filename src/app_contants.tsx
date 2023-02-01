@@ -56,6 +56,24 @@ export const accessList: Array<ITEM> = [
   },
 ];
 
+export const borrowList: Array<ITEM> = [
+  {
+    key: "miner",
+    label: "Miner",
+    width: "20%",
+  },
+  {
+    key: "credit",
+    label: "Credit line",
+    width: "25%",
+  },
+  {
+    key: "Obligation",
+    label: "Obligation",
+    width: "25%",
+  },
+];
+
 export const walletList: Array<ITEM> = [
   {
     key: "metamask",

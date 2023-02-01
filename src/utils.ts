@@ -15,13 +15,13 @@ const bignumberToInt = (num: BigNumber) => {
   return Number(bignumberFormat(num));
 };
 
-export function getValueDivide(num: number,pow:number =8,unit:number=2 ) {
+export function getValueDivide(num: number,pow:number =18,unit:number=6 ) {
   let res = new BigNumber(num || 0).dividedBy(Math.pow(10, pow));
   return res.toFixed(unit);
 }
 
-export function getValueMultiplied8(num: number) {
-  return bignumberToInt(new BigNumber(num).multipliedBy(Math.pow(10, 8)));
+export function getValueMultiplied(num: number,pow:number =18) {
+  return new BigNumber(num).multipliedBy(Math.pow(10, pow));
 }
 
 export function getAccount(wallet:walletState) { 

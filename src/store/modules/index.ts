@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 import userReducer from './login';
-import  walletReducer from './reduce'
+import { walletReducer,contractReducer} from './reduce'
 export default configureStore({
     reducer:{
         user: userReducer,
-        wallet:walletReducer,
+        wallet: walletReducer,
+        contract:contractReducer
     }
 })

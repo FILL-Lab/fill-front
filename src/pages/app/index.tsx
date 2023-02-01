@@ -9,6 +9,7 @@ import "./style.scss";
 import "./common.scss";
 import Chart from "./Charts";
 import Access from "./access";
+import Borrow from "./borrow";
 export default () => {
   console.log("====2");
   useEffect(() => {
@@ -23,6 +24,7 @@ export default () => {
           <Account />
           <Chart />
           <Access />
+          <Borrow />
         </div>
         <Wallet />
       </div>

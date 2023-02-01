@@ -8,9 +8,13 @@ import { balancesList } from "@/app_contants";
 
 export default () => {
   const wallet = useSelector((state: rootState) => state?.wallet, shallowEqual);
+  const contract = useSelector(
+    (state: rootState) => state?.contract,
+    shallowEqual
+  );
   const [balance, setBalance] = useState<{
-    FIL: string | undefined;
-    FLE: string;
+    FIL: string | number;
+    FLE: string | number;
   }>({
     FIL: "0",
     FLE: "0",
@@ -18,16 +22,16 @@ export default () => {
   useEffect(() => {
     const account = wallet?.result && wallet.result[0];
     if (account) {
-      Contract.getBalance(account)?.then((res: any) => {
-        if (res && res.length > 0) {
-          setBalance({ FIL: res[0], FLE: res[1] });
-        }
-      });
+      Contract.getBalance(account);
     }
   }, [wallet.result]);
+
+  useEffect(() => {
+    setBalance({ FIL: contract.FIL, FLE: contract.FLE });
+  }, [contract.FIL, contract.FLE]);
   return (
     <div className='account-card app-card'>
-      <h3 className='title'>My account</h3>
+      <div className='title'>My account</div>
       <div className='balance'>
         {balancesList.map((item) => {
           return (

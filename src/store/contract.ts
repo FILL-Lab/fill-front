@@ -1,39 +1,72 @@
-import { getValueDivide } from '@/utils';
-import { resolve } from 'path/posix';
-import Web3 from 'web3';
-import { balancesList, MarketPlaceContract } from '../app_contants';
-import Fill from '../server/FILL.json'
+import { getValueDivide, getValueMultiplied } from '@/utils';import Web3 from 'web3';
+import BigNumber from 'bignumber.js';
+import { balancesList, MarketPlaceContract } from '@/app_contants';
+import Fill from '@/server/FILL.json'
+import store from './modules'
+import { number } from 'echarts/core';
 
 const web3 = new Web3(window.ethereum);
+
+console.log('====3',store.dispatch)
+
 class contract {
     contractAbi: any;
     contractAddress: string;
     myContract: any;
     account: string ='';
     accountBalance: string | undefined;
+    rate: number;
     constructor() {
         this.contractAbi = JSON.parse(JSON.stringify(Fill.abi));
         this.contractAddress = MarketPlaceContract || '0x52D32b00DFd3844e090A4540e108bbc20f476a1F';
         this.myContract = new web3.eth.Contract(this.contractAbi, this.contractAddress);
+        this.rate =1
     }
 
+
+    getRate() { 
+        return this.rate;
+    }
    
 
     getAccountBalance() {
         return this.accountBalance
     }
     // get banlance
-     getBalance(acc: string) {
+     getBalance(acc: string,type?:string) {
         this.account = acc ;
         let promiseArray: Array<any> = [];
         for (const balancesItem of balancesList) {
             switch (balancesItem.key) {
+                  case 'FIL':
+                     promiseArray.push(
+                        new Promise((resolve) => {
+                            web3.eth.getBalance(this.account).then((res) => { 
+                                const balance = getValueDivide(Number(res), 18,4)
+                                this.accountBalance = res;
+                                 if (type === "FIL") { 
+                                         store.dispatch({
+                                            type: 'contract/change',
+                                             payload: {FIL:balance}
+                                        })
+                                    }
+                                resolve(balance)
+                            })
+                        }))
+                    break;
                 case 'FLE':
                     promiseArray.push(
                         new Promise((resolve) => {
                             this.myContract.methods.fleBalanceOf(this.account).call((err: any, res: any) => {
                                 if (!err) {
-                                    resolve(res)
+                                    const fleBalance = getValueDivide(Number(res), 18);
+                                    if (type === "FLE") { 
+                                         store.dispatch({
+                                            type: 'contract/change',
+                                             payload: {FLE:fleBalance}
+                                        })
+                                    }
+                                    resolve(fleBalance)
                                 } else {
                                     return 'error'
                                 }
@@ -41,39 +74,52 @@ class contract {
                             });
                         }))
                     break;
-                case 'FIL':
-                     promiseArray.push(
-                        new Promise((resolve) => {
-                            web3.eth.getBalance(this.account).then((res) => { 
-                                const balance = getValueDivide(Number(res), 18)
-                                this.accountBalance= balance;
-                                resolve(balance)
-                            })
-                        }))
-                    break;
+              
 
              
             }
         }
-        if (promiseArray.length) { 
-            return new Promise((resolve, reject) => {
-                 Promise.all(promiseArray).then(res => { 
-               console.log('====2', res)
-               resolve (res)
-            })
-             })  
+        if (promiseArray.length && !type) { 
+                Promise.all(promiseArray).then(res => { 
+                    store.dispatch({
+                        type: 'contract/change',
+                        payload: {
+                           FIL : res[0],
+                            FLE:res[1]
+                        }
+                    })
+            }) 
         }
      }
     
-    async setDeposit (value: number | string) {
-        console.log('===223',this.account)
-        this.myContract.methods.deposit(Number(1*Math.pow(10,9))).send({
+    //存取
+    access(value: string | number, type: string) { 
+        const number =getValueMultiplied(Number(value),18)
+        this.myContract.methods[type](number).send({
             from: this.account,
-            value:Number(1*Math.pow(10,9))
-        }).on('receipt', (data:any) => {
-            console.log('====2=22',data)
+            value:number
+         },
+            (err: any, res: any) => {
+             if (!err) { 
+               //this.DepositsBalance()
+            }
+         }) .on('receipt', (data: any) => {
+             console.log('====2=22', data)
+             // 存 或 取成功
+            this.getBalance(this.account)
+            
         })
-     }
+
+    }
+    
+    DepositsBalance() { 
+        this.myContract.methods.depositsBalance().call((err:any, res:any) => {
+            console.log('=111===33333',err,res)
+         })
+    }
+    
+
+    
 }
  
 
