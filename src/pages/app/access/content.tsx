@@ -13,24 +13,10 @@ export default ({ data }: { data: { key: string; label: string } }) => {
     shallowEqual
   );
 
-  useEffect(() => {
-    //console.log("====contract", contract);
-  }, [contract]);
-
   const handleClick = () => {
-    console.log("=====3", data);
     Contract.access(value, data.key);
-    //Contract.Deposit(value);
-    //contract;
-    // dispath({
-    //   type: "contract/Deposit",
-    //   payload: {
-    //     value,
-    //   },
-    // });
-
-    console.log("======3", contract);
   };
+
   return (
     <div className=' wallet-content access-content'>
       <div className='text'>

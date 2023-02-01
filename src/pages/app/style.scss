@@ -110,6 +110,9 @@
 
 .access-content{
     align-items: flex-start;
+    .text{
+        text-align: left;
+    }
     .text-detail{
         display: inline-block;
         font-size: 14px;

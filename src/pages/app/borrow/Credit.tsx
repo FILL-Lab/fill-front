@@ -29,7 +29,6 @@ export default (props: Props) => {
 
   // const balance =
   const handleConfirm = () => {
-    console.log("---2", value);
     console.log("handleConfirm");
   };
   return (

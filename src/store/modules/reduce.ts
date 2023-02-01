@@ -24,10 +24,6 @@ const web3 = new Web3(window.ethereum);
 
 
 
-const contractAbi = JSON.parse(JSON.stringify(Fill.abi));
-const contractAddress = MarketPlaceContract || '0x52D32b00DFd3844e090A4540e108bbc20f476a1F';
-const myContract = new web3.eth.Contract(contractAbi, contractAddress);
-
 const contractSlice = createSlice({
     name: 'contract',
     initialState: {
@@ -38,7 +34,7 @@ const contractSlice = createSlice({
     },
     reducers: {
         change: (state:contractState, action) => {
-            console.log('==============3',state,action)
+          //  console.log('==============3',state,action)
             return { ...state, ...action.payload }
         },
       

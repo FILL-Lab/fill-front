@@ -35,6 +35,8 @@ export default () => {
                 type: "wallet/change",
                 payload: { show: true, wallet: undefined, result: undefined },
               });
+              localStorage.removeItem("wallet");
+              window.location.reload();
             }}>
             {setStr(wallet.result[0])}
           </Button>

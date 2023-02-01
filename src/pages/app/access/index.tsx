@@ -10,10 +10,10 @@ import { getAccount } from "@/utils";
 export default () => {
   const wallet = useSelector((state: rootState) => state?.wallet, shallowEqual);
   const [tab, setTab] = useState<string>("deposit");
+
   const account = useMemo(() => {
     return getAccount(wallet);
   }, [wallet?.result]);
-  console.log("===2", wallet);
   return (
     <Tabs
       className='tabs-list app-card'

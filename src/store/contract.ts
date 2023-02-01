@@ -1,13 +1,9 @@
 import { getValueDivide, getValueMultiplied } from '@/utils';import Web3 from 'web3';
-import BigNumber from 'bignumber.js';
 import { balancesList, MarketPlaceContract } from '@/app_contants';
 import Fill from '@/server/FILL.json'
 import store from './modules'
-import { number } from 'echarts/core';
 
 const web3 = new Web3(window.ethereum);
-
-console.log('====3',store.dispatch)
 
 class contract {
     contractAbi: any;
@@ -104,7 +100,7 @@ class contract {
                //this.DepositsBalance()
             }
          }) .on('receipt', (data: any) => {
-             console.log('====2=22', data)
+             console.log('receipt success', data)
              // 存 或 取成功
             this.getBalance(this.account)
             
