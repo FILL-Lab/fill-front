@@ -96,7 +96,6 @@ class contract {
         const number =getValueMultiplied(Number(value),18)
         this.myContract.methods[type](number,1,1).send({
             from: this.account,
-            value:number
          },
             (err: any, res: any) => {
              if (!err) { 

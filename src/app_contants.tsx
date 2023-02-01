@@ -37,7 +37,7 @@ export const itemsChart: Array<ITEM> = [
   },
   {
     key: "2",
-    label: `FLE/FIL`,
+    label: `FIL/FLE`,
   },
   {
     key: "3",
