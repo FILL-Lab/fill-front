@@ -7,6 +7,7 @@ import { rootState } from "@/type";
 import { getAccount, getObligation, getValueDivide } from "@/utils";
 import Credit from "./Credit";
 import { useInterval } from "@/hooks/Interval";
+import Contract from "@/store/contract";
 
 export default () => {
   const wallet = useSelector((state: rootState) => state?.wallet, shallowEqual);
@@ -30,14 +31,14 @@ export default () => {
       contract.borrowList.forEach((minerData: any) => {
         const timer =
           Math.trunc(new Date().getTime() / 1000) - minerData.borrowTime;
-        // console.log("-timer---3", minerData);
+        //console.log("-timer---3", minerData);
         const obj = {
           miner: minerData.minerAddr,
           miner_f: minerData.miner_f,
           credit: getValueDivide(minerData?.balanceData?.result),
           Obligation: getObligation(
             minerData.amount,
-            minerData.interestRate,
+            Contract.getRate(),
             timer
           ),
           borrowTime: minerData.borrowTime,
@@ -67,14 +68,22 @@ export default () => {
       key: "credit",
       label: "Credit line",
       width: "25%",
+      unit: "FIL",
     },
     {
       key: "Obligation",
       label: "Obligation",
       width: "25%",
+      unit: "FIL",
       render: (text?: string, record?: any) => {
         //  const value =getObligation(record.credit,)
-        return <span>{text}</span>;
+        let showtext = text;
+        // useInterval(() => {
+        //   const timer =
+        //     Math.trunc(new Date().getTime() / 1000) - record.borrowTime;
+        //   showtext = getObligation(record.amount, record.interestRate, timer);
+        // }, 30000);
+        return <span>{showtext}</span>;
       },
     },
     {
@@ -141,6 +150,9 @@ export default () => {
                               dataItem
                             )
                           : dataItem[headerItem.key]}
+                        {headerItem.unit && (
+                          <span className='unit'>{headerItem.unit}</span>
+                        )}
                       </div>
                     );
                   })}

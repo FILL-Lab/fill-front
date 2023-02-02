@@ -36,13 +36,12 @@ export function getAccount(wallet:walletState) {
 
 export function getObligation(amount: number, rate: number, timer: number) {
   const newTime = getTimes(timer);
-  const showAmount = getValueDivide(amount);
-  const tNum = BigNumber(0.05).multipliedBy(newTime);
-   const numValue = BigNumber(showAmount).multipliedBy(BigNumber(Math.exp(Number(tNum.toString()))));
-  return bignumberFormat(numValue)
+  const tNum = BigNumber(rate).multipliedBy(newTime);
+  const numValue = BigNumber(amount).multipliedBy(BigNumber(Math.exp(Number(tNum.toString()))));
+  return  getValueDivide(bignumberToInt(numValue))
 }
  
 
 export function getTimes(time:number) { 
-  return  BigNumber(time).dividedBy(BigNumber(360*864000))
+  return  BigNumber(time).dividedBy(BigNumber(365*864000))
 }

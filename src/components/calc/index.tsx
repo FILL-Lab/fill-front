@@ -3,13 +3,13 @@
 import { CalculatorFilled } from "@ant-design/icons";
 import { Input, Modal } from "antd";
 import Contract from "@/store/contract";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./style.scss";
-import { spawn } from "child_process";
+import { getObligation, getValueMultiplied } from "@/utils";
 export default () => {
   const [show, setShow] = useState(false);
-
-  useEffect(() => {}, []);
+  const [amount, setAmount] = useState("");
+  const [calcNum, setCalcNum] = useState("");
 
   const calcList = [
     {
@@ -26,6 +26,8 @@ export default () => {
       title: "Repayment Amount",
     },
   ];
+
+  const handleChage = () => {};
   return (
     <>
       <span className='calc-icon'>
@@ -50,12 +52,24 @@ export default () => {
             return (
               <div className='calc-item' key={item.key}>
                 <span className='title'>{item.title}</span>
-                {item.value ? (
+                {item.key !== "term" ? (
                   <span className='app-input calc-input value'>
-                    {item.value}
+                    {item.value || calcNum}
                   </span>
                 ) : (
-                  <Input className='app-input calc-input' />
+                  <Input
+                    className='app-input calc-input'
+                    onChange={(e) => {
+                      setAmount(e.target.value);
+                      setCalcNum(
+                        getObligation(
+                          Number(getValueMultiplied(Number(e.target.value))),
+                          Contract.getRate(),
+                          1
+                        )
+                      );
+                    }}
+                  />
                 )}
               </div>
             );

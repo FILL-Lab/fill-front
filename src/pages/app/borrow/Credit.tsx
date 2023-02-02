@@ -1,11 +1,10 @@
 /** @format */
 
-import { Button, Divider, Input, Modal } from "antd";
+import { Input, Modal } from "antd";
 import { useState } from "react";
 import { LoadingOutlined } from "@ant-design/icons";
 import Calc from "@/components/calc";
 import Contract from "@/store/contract";
-import { spawn } from "child_process";
 import { getValueMultiplied } from "@/utils";
 
 interface Props {
@@ -14,17 +13,6 @@ interface Props {
   record: Record<string, any>;
   onChange: (bool: boolean) => void;
 }
-
-const objText = {
-  "Credit line": {
-    InputLabel: "Borrowing amount",
-    InputPlace: "  Enter the amount you want to lend",
-  },
-  Obligation: {
-    InputLabel: "",
-    InputPlace: "Enter the amount you want to lend",
-  },
-};
 
 export default (props: Props) => {
   const { show, onChange, title, record } = props;
