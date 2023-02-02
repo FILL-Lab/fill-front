@@ -14,16 +14,11 @@ export default () => {
   const optiosnList: Record<string, any> = {
     "1": {
       backgroundColor: "transparent",
-      grid: {
-        top: 15,
-        left: "6%",
-        right: "6%",
-        bottom: "10%",
-      },
       xAxis: {
         type: "category",
         boundaryGap: false,
         data: [
+          "2022-08",
           "2022-09",
           "2022-10",
           "2022-11",
@@ -53,7 +48,10 @@ export default () => {
           "2023-02",
         ],
       },
-
+      yAxis: {
+        type: "value",
+        min: 1,
+      },
       series: [
         {
           data: [1, 1.02, 1.04, 1.04, 1.05, 1.07, 1.08, 1.09],

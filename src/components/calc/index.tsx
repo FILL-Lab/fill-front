@@ -2,15 +2,20 @@
 
 import { CalculatorFilled } from "@ant-design/icons";
 import { Input, Modal } from "antd";
-import { useState } from "react";
+import Contract from "@/store/contract";
+import { useEffect, useState } from "react";
 import "./style.scss";
+import { spawn } from "child_process";
 export default () => {
   const [show, setShow] = useState(false);
+
+  useEffect(() => {}, []);
 
   const calcList = [
     {
       key: "APR",
       title: "APR",
+      value: Contract.getRate(),
     },
     {
       key: "term",
@@ -45,7 +50,13 @@ export default () => {
             return (
               <div className='calc-item' key={item.key}>
                 <span className='title'>{item.title}</span>
-                <Input className='app-input calc-input' />
+                {item.value ? (
+                  <span className='app-input calc-input value'>
+                    {item.value}
+                  </span>
+                ) : (
+                  <Input className='app-input calc-input' />
+                )}
               </div>
             );
           })}

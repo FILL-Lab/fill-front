@@ -1,10 +1,12 @@
 .fill-app{
     background-color: #000;
     color: #fff;
+    height: 100vh;
+    overflow: auto;
     .main{
         display: flex;
          border-top: 1px solid rgba(255,255,255,0.12);
-        height: 100%;
+        height: calc(100% - 60px);
         width: 100%;
         .menu{
             width: 200px;
@@ -16,6 +18,7 @@
         flex: 1;
         flex-wrap: wrap;
         row-gap: 30px;
+        column-gap: 20px;
     }
     }
     
@@ -103,8 +106,7 @@
 }
 
 .chart-list{
-    width:  600px;
-    padding: 0px 0px 15px 0px ;
+    width: 50%;
     color: #fff;
 }
 
@@ -168,8 +170,7 @@
 
 .borrow-card{
     position: relative;
-    width: 600px;
-    margin-left: 30px;
+     width: 50%;
     display: flex;
     flex-direction: column;
     .title{
@@ -177,17 +178,20 @@
     }
     .borrow-content-header{
         display: flex;
+        padding-right: 50px;
         .header-item{
+
             font-size: 20px;
             font-family: PingFangSC-Regular, PingFang SC;
         }
     }
     .borrow-content{
+        padding-right: 50px;
         .content-item{
             display: flex;
             font-size: 16px;
             line-height: 40px;
-            //padding-left: 4px;
+            align-items: center;
             .edit{
                 display: flex;
                 width: 100%;
@@ -197,13 +201,13 @@
 
     }
     .miner-btn{
-         font-size: 16px;
+    font-size: 16px;
     font-family: PingFangSC-Regular, PingFang SC;
-        width: 90%;
+    width: 85%;
     position: absolute;
     bottom: 15px;
     text-align: center;
-     line-height: 36px;
+     line-height: 42px;
      border: 1px solid #00ED89;
         border-radius: 6px;
         cursor: pointer;

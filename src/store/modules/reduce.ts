@@ -1,11 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getValueDivide } from '@/utils';import Web3 from 'web3';
-import BigNumber from 'bignumber.js';
-import { balancesList, MarketPlaceContract } from '@/app_contants';
-import Fill from '@/server/FILL.json'
-import { walletState,contractState } from "@/type";
+import { walletState,contractState, creditState } from "@/type";
 
-const web3 = new Web3(window.ethereum);
 
 
  const walletSlice = createSlice({
@@ -27,22 +22,27 @@ const web3 = new Web3(window.ethereum);
 const contractSlice = createSlice({
     name: 'contract',
     initialState: {
-        account: '0x5C045CFAfE8387a98eccaCAcCd24b852E95624Ee',
-        FIL: '',
-        FLE: "",
-        loading:false
+      account: '0x5C045CFAfE8387a98eccaCAcCd24b852E95624Ee',
+      FIL: '',
+      FLE: "",
+      loading:false,
+      minerList: [],
+        borrowList:[]
     },
     reducers: {
         change: (state:contractState, action) => {
-          //  console.log('==============3',state,action)
             return { ...state, ...action.payload }
         },
       
     }
 })
 
+
+
+
+
  const walletReducer = walletSlice.reducer;
- const contractReducer = contractSlice.reducer;
+const contractReducer = contractSlice.reducer;
 
 
 export  {walletReducer,contractReducer}

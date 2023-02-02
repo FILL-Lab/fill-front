@@ -1,21 +1,20 @@
 /** @format */
 
 import Contract from "@/store/contract";
-import { rootState } from "@/type";
-import { Input, notification } from "antd";
-import { useEffect, useState } from "react";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { Input } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
+import { useState } from "react";
 export default ({ data }: { data: { key: string; label: string } }) => {
   const [value, setValue] = useState("");
-  const dispath = useDispatch();
-  const contract = useSelector(
-    (state: rootState) => state?.contract,
-    shallowEqual
-  );
-
+  const [loading, setLoading] = useState(false);
   const handleClick = () => {
-    if (value && Number(value)) {
-      Contract.access(value, data.key);
+    if (!loading) {
+      setLoading(true);
+      if (value && Number(value)) {
+        Contract.access(value, data.key).then((res) => {
+          setLoading(false);
+        });
+      }
     }
   };
 
@@ -39,7 +38,7 @@ export default ({ data }: { data: { key: string; label: string } }) => {
         </span>
       </div>
       <div className='connect-btn' onClick={handleClick}>
-        confirm
+        {loading ? <LoadingOutlined /> : "confirm"}
       </div>
     </div>
   );

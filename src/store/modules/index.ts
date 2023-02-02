@@ -5,6 +5,7 @@ export default configureStore({
     reducer:{
         user: userReducer,
         wallet: walletReducer,
-        contract:contractReducer
+        contract: contractReducer,
+     
     }
 })

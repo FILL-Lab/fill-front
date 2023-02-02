@@ -53,17 +53,26 @@ export default (props: Props) => {
       tooltip: {},
       grid: {
         top: 15,
-        left: "6%",
-        right: "6%",
+        left: "5%",
+        right: "5%",
         bottom: "10%",
       },
       yAxis: {
         type: "value",
+        min: 0,
       },
     };
     // 4. 调用表格数据
     chart.setOption({ ...option, ...propsOption });
   }, [propsOption]);
+
+  useEffect(() => {
+    const handleSize = () => {};
+    window.addEventListener("resize", handleSize);
+    return () => {
+      window.removeEventListener("resize", handleSize);
+    };
+  }, []);
 
   return <div style={{ width: "100%", height: "260px" }} ref={chartRef} />;
 };

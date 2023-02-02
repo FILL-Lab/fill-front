@@ -3,6 +3,12 @@
     font-size: 22px;
     font-family: Barlow-Bold, Barlow;
      padding-left: 30px;
+     .ant-tabs-content{
+         height: 100%;
+         .ant-tabs-tabpane{
+             height: inherit;
+         }
+     }
     .ant-tabs-tab{
     font-size: 22px;
     &:hover{

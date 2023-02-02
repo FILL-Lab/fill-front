@@ -17,6 +17,34 @@ export default () => {
       });
     }
   }, []);
+
+  useEffect(() => {
+    const handleAccountsChanged = (accounts: any, other: any) => {
+      console.log("===========3", accounts);
+      //   if (accounts.length === 0 || accounts[0] !== public_key) {
+      //     //退出登录
+      //     dispath({
+      //       type: "user/login",
+      //       payload: { cancel: true },
+      //     });
+      //   }
+    };
+    if (window.ethereum) {
+      window.ethereum.on("accountsChanged", handleAccountsChanged);
+    } else {
+      console.log("=不支持钱包");
+    }
+
+    return () => {
+      if (window.ethereum) {
+        window.ethereum.removeListener(
+          "accountsChanged",
+          handleAccountsChanged
+        );
+      }
+    };
+  }, []);
+
   return (
     <BrowserRouter>
       <Routes>

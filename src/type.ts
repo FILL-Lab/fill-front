@@ -18,8 +18,14 @@ export interface contractState {
     account?: number | string,
     FIL: number | string,
     FLE: number | string,
-    loading:boolean
+    loading: boolean,
+    minerList: Record<string, any>,
+    borrowList:Array<any>
 
+}
+
+export interface creditState { 
+    show:boolean
 }
 
 export interface walletState { 
@@ -30,5 +36,6 @@ export interface walletState {
 export interface rootState {
     contract: contractState; 
     user: userState
-    wallet:walletState
+    wallet: walletState
+    credit:creditState
 }
