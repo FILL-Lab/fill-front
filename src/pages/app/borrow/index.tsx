@@ -121,7 +121,7 @@ export default () => {
     <div className='tabs-list app-card borrow-card'>
       <div className='title'>Borrow / Repay</div>
       {account ? (
-        <div>
+        <div className='account-count'>
           <div className='borrow-content-header'>
             {borrowList.map((item) => {
               return (

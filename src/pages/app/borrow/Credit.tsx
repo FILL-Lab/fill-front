@@ -36,6 +36,7 @@ export default (props: Props) => {
             ];
       Contract.borrowPay(type, payloadList).then((res) => {
         setLoading(false);
+        onChange(false);
       });
     }
   };

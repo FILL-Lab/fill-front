@@ -176,17 +176,20 @@
     .title{
         padding: 12px 0px;
     }
-    .borrow-content-header{
+    .account-count{
+        max-height: 260px;
+        .borrow-content-header{
         display: flex;
         padding-right: 50px;
         .header-item{
-
             font-size: 20px;
             font-family: PingFangSC-Regular, PingFang SC;
         }
     }
     .borrow-content{
         padding-right: 50px;
+        height: 180px;
+        overflow: auto;
         .content-item{
             display: flex;
             font-size: 16px;
@@ -203,6 +206,10 @@
         }
 
     }
+    }
+    
+
+    
     .miner-btn{
     font-size: 16px;
     font-family: PingFangSC-Regular, PingFang SC;
@@ -210,7 +217,7 @@
     position: absolute;
     bottom: 15px;
     text-align: center;
-     line-height: 42px;
+     line-height: 36px;
      border: 1px solid #00ED89;
         border-radius: 6px;
         cursor: pointer;

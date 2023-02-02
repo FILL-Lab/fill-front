@@ -1,26 +1,29 @@
 /** @format */
 import "./style.scss";
 import gif from "@/assets/fill.gif";
-import { DealList, footerList, holdersList, operateList } from "../../contants";
-import { getSvg } from "../../svgTpes";
+import { DealList, footerList, holdersList, operateList } from "@/contants";
+import { getSvg } from "@/svgTpes";
 import { useState } from "react";
+import logo from "@/assets/logo.svg";
 import holders from "@/assets/holders.webp";
 export default () => {
   const [deal, setDeal] = useState("Deposit");
   const [operate, setOperate] = useState("Deposit");
   return (
     <div className='fill'>
-      {/* <div className='fill-logo logo'>FILL</div> */}
-      <div className='fill-header'>
-        <img className='gif' src={gif} alt='' />
+      <div className='fill-logo logo'>
+        <img src={logo} className='logo' alt='' />
         <div
           className='app'
           onClick={() => {
-            // navigate("/home");
             window.open("/home");
           }}>
           Launch APP
         </div>
+      </div>
+      <div className='fill-header'>
+        <img className='gif' src={gif} alt='' />
+
         <div className='text-title'>
           <div className='title'>
             FILECOIN LIQUIDITY POOL FOR
@@ -126,7 +129,9 @@ export default () => {
         </div>
       </div>
       <div className='footer'>
-        {/* <div className='fill-logo logo'>FILL</div> */}
+        <div className='fill-logo logo'>
+          <img src={logo} className='logo' alt='' />
+        </div>
         <div className='link'>
           {footerList.map((item, index) => {
             return (
