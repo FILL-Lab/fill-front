@@ -124,13 +124,14 @@ class contract {
             }).on('receipt', (data: any) => {
              console.log('receipt success', data)
              // 存 或 取成功
-             const typeStr = type === 'deposit' ? 'Deposit' : 'Redeem'
+                const typeStr = type === 'deposit' ? 'Deposit' : 'Redeem';
+                const notiStr = type === 'deposit' ? 'Deposit' : 'Redemption';
              const returnValue = data.events[typeStr].returnValues;
              // 转变了多少的 FLE/FIL
              const value = getValueDivide(Number(returnValue[2]), 18)
             notification.open({
                 message: "",
-                description: `Your deposit is completed, get ${value} FLE`,
+                description: `${notiStr} is completed, ${value} ${type === 'deposit' ?'FLE received':'FIL withDrawn' }`,
                 duration: 10,
                 className: "app-notic",
                 });
@@ -161,7 +162,7 @@ class contract {
              const value = getValueDivide(Number(returnValue[2]), 18)
             notification.open({
                 message: "",
-                description: `Your deposit is completed, get ${value} FLE`,
+                description: `Successfully ${type === 'payback' ? 'repaid':'borrowed'} ${value} FIL`,
                 duration: 10,
                 className: "app-notic",
             });

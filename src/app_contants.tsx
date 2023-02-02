@@ -12,7 +12,7 @@ export const balancesList: Array<{
   unit: string;
 }> = [
   {
-    title: "Balance",
+    title: "FIL Balance",
     key: "FIL",
     unit: "FIL",
   },
@@ -22,7 +22,7 @@ export const balancesList: Array<{
     title: (
       <span>
         FLE Balance{" "}
-        <Tooltip title='该资产为存入FIL后所获得的资产，可用户赎回FIL'>
+        <Tooltip title='This asset is a deposit certificate, can be obtained by FIL deposit and used for FIL redemption '>
           <ExclamationCircleOutlined className='icon' />
         </Tooltip>
       </span>

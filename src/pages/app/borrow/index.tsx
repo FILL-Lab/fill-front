@@ -1,5 +1,5 @@
 /** @format */
-import { Button } from "antd";
+import { Button, Tooltip } from "antd";
 import { useEffect, useMemo, useState } from "react";
 import NoData from "@/components/NoData";
 import { useSelector, shallowEqual } from "react-redux";
@@ -8,6 +8,7 @@ import { getAccount, getObligation, getValueDivide } from "@/utils";
 import Credit from "./Credit";
 import { useInterval } from "@/hooks/Interval";
 import Contract from "@/store/contract";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
 
 export default () => {
   const wallet = useSelector((state: rootState) => state?.wallet, shallowEqual);
@@ -72,7 +73,14 @@ export default () => {
     },
     {
       key: "Obligation",
-      label: "Obligation",
+      label: (
+        <span>
+          Obligation{" "}
+          <Tooltip title='Principal + Interest Accrued'>
+            <ExclamationCircleOutlined className='icon' />
+          </Tooltip>
+        </span>
+      ),
       width: "25%",
       unit: "FIL",
       render: (text?: string, record?: any) => {
@@ -106,7 +114,7 @@ export default () => {
               className='fill-btn-border'
               onClick={() => {
                 setShow(true);
-                setTitle("Obligation");
+                setTitle("Repayment");
                 setRecord(record);
               }}>
               Repay

@@ -23,10 +23,10 @@ export default (props: Props) => {
   const handleConfirm = () => {
     if (!loading) {
       setLoading(true);
-      const type = title === "Obligation" ? "payback" : "borrow";
+      const type = title === "Repayment" ? "payback" : "borrow";
       // 借
       const payloadList =
-        title === "Obligation"
+        title === "Repayment"
           ? [record.miner, record.borrowId]
           : [
               record.miner,
@@ -77,7 +77,11 @@ export default (props: Props) => {
               setValue(e.target.value);
             }}
             className='app-input app-inputNumber access-input'
-            placeholder='Enter the amount you want to lend'
+            placeholder={
+              title === "Repayment"
+                ? "Enter the amount of FIL to repay"
+                : "Enter the amount of FIL to borrow"
+            }
           />
           <p className='detail'>
             {title === "Credit line" && <Calc />}

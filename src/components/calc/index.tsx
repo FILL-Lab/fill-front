@@ -15,19 +15,24 @@ export default () => {
     {
       key: "APR",
       title: "APR",
-      value: Contract.getRate(),
+      value: Contract.getRate() * 100,
+      tip: "nterest is compound continuously",
     },
     {
       key: "term",
-      title: "Borrowing term",
+      title: "Borrowing Term",
+    },
+    {
+      key: "amount",
+      title: "Principal Amount",
     },
     {
       key: "Amount",
-      title: "Repayment Amount",
+      title: "Total Obligation",
+      tip: "Principal + Interest",
     },
   ];
 
-  const handleChage = () => {};
   return (
     <>
       <span className='calc-icon'>
@@ -42,7 +47,7 @@ export default () => {
         wrapClassName='app-modal-wrap'
         open={show}
         width={650}
-        title='rate calculation'
+        title='Borrowing Interset Calculator'
         footer={null}
         onCancel={() => {
           setShow(false);

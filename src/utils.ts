@@ -36,7 +36,7 @@ export function getAccount(wallet:walletState) {
 
 export function getObligation(amount: number, rate: number, timer: number) {
   const newTime = getTimes(timer);
-  const tNum = BigNumber(rate).multipliedBy(newTime);
+  const tNum = BigNumber(rate * 100).multipliedBy(newTime);
   const numValue = BigNumber(amount).multipliedBy(BigNumber(Math.exp(Number(tNum.toString()))));
   return  getValueDivide(bignumberToInt(numValue))
 }

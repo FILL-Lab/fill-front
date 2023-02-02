@@ -7,7 +7,7 @@ export default () => {
   const dispath = useDispatch();
   return (
     <div className='wallet-content'>
-      <div className='text'>Please connect your wallet to FILL</div>
+      <div className='text'>Please connect your wallet</div>
       <div
         className='connect-btn'
         onClick={() => {
@@ -16,7 +16,7 @@ export default () => {
             payload: { show: true },
           });
         }}>
-        connect wallect
+        connect Wallet
       </div>
     </div>
   );

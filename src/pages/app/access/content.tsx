@@ -27,18 +27,24 @@ export default ({ data }: { data: { key: string; label: string } }) => {
           onChange={(e) => {
             setValue(e.target.value);
           }}
-          placeholder={`Please enter the amount you want to ${data.key}`}
+          placeholder={`Enter the amount of ${
+            data.key === "deposit" ? "FIL" : "FLE"
+          } to ${data.key}`}
         />
         <span className='text-detail'>
-          You will receive ~{" "}
+          You will receive approx. {""}
           <span className='number'>
-            {value ? Contract.getRate() * Number(value) : "000"}
+            {value ? Contract.getRate() * Number(value) : "0.000"}
           </span>{" "}
           {data.key === "deposit" ? "FLE" : "FIL"}
         </span>
       </div>
       <div className='connect-btn' onClick={handleClick}>
-        {loading ? <LoadingOutlined /> : "confirm"}
+        {loading ? (
+          <LoadingOutlined />
+        ) : (
+          `${data.key === "deposit" ? "Deposit" : "Redeem"}`
+        )}
       </div>
     </div>
   );
