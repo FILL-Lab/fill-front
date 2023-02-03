@@ -223,3 +223,17 @@
         cursor: pointer;
     }
 }
+
+.borrow-modal{
+    .input-value-content{
+        position: relative;
+        .unit{
+            position: absolute;
+            cursor: pointer;
+            top: 20px;
+            right: 15px;
+            font-size: 16px;
+            color: rgba(255,255,255,0.6);
+        }
+    }
+}

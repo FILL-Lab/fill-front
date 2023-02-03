@@ -21,9 +21,9 @@ export const balancesList: Array<{
     unit: "FLE",
     title: (
       <span>
-        FLE Balance{" "}
+        FLE Balance
         <Tooltip title='This asset is a deposit certificate, can be obtained by FIL deposit and used for FIL redemption '>
-          <ExclamationCircleOutlined className='icon' />
+          <ExclamationCircleOutlined className='tip-icon' />
         </Tooltip>
       </span>
     ),

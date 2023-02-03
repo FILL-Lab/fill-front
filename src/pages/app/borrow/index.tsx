@@ -42,6 +42,7 @@ export default () => {
             Contract.getRate(),
             timer
           ),
+          balanceData: minerData?.balanceData,
           borrowTime: minerData.borrowTime,
           interestRate: minerData.interestRate,
           amount: minerData.amount,
@@ -75,9 +76,9 @@ export default () => {
       key: "Obligation",
       label: (
         <span>
-          Obligation{" "}
+          Obligation
           <Tooltip title='Principal + Interest Accrued'>
-            <ExclamationCircleOutlined className='icon' />
+            <ExclamationCircleOutlined className='tip-icon' />
           </Tooltip>
         </span>
       ),
