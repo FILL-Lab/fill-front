@@ -40,7 +40,7 @@ export default () => {
     if (window.ethereum) {
       window.ethereum.on("accountsChanged", handleAccountsChanged);
     } else {
-      console.log("=不支持钱包");
+      console.log("=不支持钱包 || 未下载钱包");
     }
 
     return () => {

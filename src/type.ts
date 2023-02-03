@@ -1,3 +1,5 @@
+import { BigNumber } from "ethers";
+
 export interface ITEM { 
     label: string;
     key: string;
@@ -20,7 +22,9 @@ export interface contractState {
     FLE: number | string,
     loading: boolean,
     minerList: Record<string, any>,
-    borrowList:Array<any>
+    borrowList: Array<any>
+    contractBalance?: Number;
+    contractBalanceRes?:BigNumber
 
 }
 
@@ -28,7 +32,7 @@ export interface creditState {
     show:boolean
 }
 
-export interface walletState { 
+export interface walletState {
     show: boolean;
     wallet?: string;
     result?:any

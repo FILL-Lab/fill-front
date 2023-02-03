@@ -1,11 +1,13 @@
 /** @format */
 
 import { Input, Modal } from "antd";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { LoadingOutlined } from "@ant-design/icons";
 import Calc from "@/components/calc";
 import Contract from "@/store/contract";
 import { getValueMultiplied } from "@/utils";
+import { shallowEqual, useSelector } from "react-redux";
+import { rootState } from "@/type";
 
 interface Props {
   show: boolean;
@@ -15,10 +17,23 @@ interface Props {
 }
 
 export default (props: Props) => {
+  const contract = useSelector(
+    (state: rootState) => state?.contract,
+    shallowEqual
+  );
+
   const { show, onChange, title, record } = props;
   const [value, setValue] = useState("");
   const [loading, setLoading] = useState(false);
   const [all, setAll] = useState(false);
+
+  const { contractBalance = 0, contractBalanceRes = 0 } = useMemo(() => {
+    return {
+      contractBalance: contract?.contractBalance,
+      contractBalanceRes: contract?.contractBalanceRes,
+    };
+  }, [contract?.contractBalance, contract?.contractBalanceRes]);
+
   // const balance =
   const handleConfirm = () => {
     if (!loading) {
@@ -31,12 +46,14 @@ export default (props: Props) => {
           : [
               record.miner,
               all
-                ? record.balanceData.result
-                : Number(getValueMultiplied(Number(value))),
+                ? record.balanceData.result > contractBalanceRes
+                  ? contractBalanceRes
+                  : record.balanceData.result
+                : getValueMultiplied(Number(value)),
               0.05 * Math.pow(10, 6),
               1 * Math.pow(10, 6),
             ];
-      Contract.borrowPay(type, payloadList).then((res) => {
+      Contract.borrowPay(type, payloadList, record.Obligation).then((res) => {
         setLoading(false);
         onChange(false);
         setValue("");
@@ -95,7 +112,13 @@ export default (props: Props) => {
             <span
               className='unit'
               onClick={() => {
-                setValue(record.credit);
+                const value =
+                  title === "Repayment"
+                    ? record.Obligation
+                    : contractBalance && contractBalance > record?.credit
+                    ? record?.credit
+                    : contractBalance;
+                setValue(value);
                 setAll(true);
               }}>
               {title === "Repayment" ? "Repay" : "Borrow"} all
@@ -105,9 +128,15 @@ export default (props: Props) => {
           <p className='detail'>
             {title === "Credit line" && <Calc />}
             {title === "Credit line" ? (
-              <span> Max:{record?.credit} FIL</span>
+              <span>
+                Max:
+                {contractBalance && contractBalance > record?.credit
+                  ? record?.credit
+                  : contractBalance}{" "}
+                FIL
+              </span>
             ) : (
-              <span>Pending repayment:{record?.credit} FIL</span>
+              <span>Pending repayment:{record.Obligation} FIL</span>
             )}
           </p>
         </div>

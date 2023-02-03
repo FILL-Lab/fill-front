@@ -16,7 +16,7 @@ export default () => {
             payload: { show: true },
           });
         }}>
-        connect Wallet
+        Connect Wallet
       </div>
     </div>
   );

@@ -1,16 +1,16 @@
 /** @format */
-
-import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import store from "./store/modules";
 import { Provider } from "react-redux";
+import { Buffer } from "buffer";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
+window.Buffer = window.Buffer || Buffer;
 root.render(
   <Provider store={store}>
     <App />

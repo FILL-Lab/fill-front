@@ -29,7 +29,7 @@ export default () => {
           localStorage.removeItem("wallet");
           window.location.reload();
         }}>
-        sign out
+        Sign Out
       </li>
     </ul>
   );

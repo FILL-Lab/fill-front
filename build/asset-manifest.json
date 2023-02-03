@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/static/css/main.cf54e364.css",
-    "main.js": "/static/js/main.1410146a.js",
+    "main.css": "/static/css/main.b606572b.css",
+    "main.js": "/static/js/main.18e173e3.js",
     "static/js/787.28cb0dcd.chunk.js": "/static/js/787.28cb0dcd.chunk.js",
     "static/media/fill.gif": "/static/media/fill.45d208dbd489e3513c08.gif",
-    "static/media/Deposit.svg": "/static/media/Deposit.c102472044477b99ed9d559aa26bd6ed.svg",
+    "static/media/Deposit.svg": "/static/media/Deposit.60d3f5d9bdc676fd9a2fcf740ab08c06.svg",
     "static/media/Barlow-Bold.ttf": "/static/media/Barlow-Bold.8247eaeb0799c0acafc6.ttf",
-    "static/media/repay.svg": "/static/media/repay.ce8914d2cb5afce87598525433e577f9.svg",
-    "static/media/Withdraw.svg": "/static/media/Withdraw.d7e8395155738243260f6cd40a808821.svg",
-    "static/media/Borrow.svg": "/static/media/Borrow.939da51dd6710fb7d861e3b0eab4310d.svg",
-    "static/media/logo.svg": "/static/media/logo.e39cb577f0ee7e17f273e93d0268b144.svg",
+    "static/media/repay.svg": "/static/media/repay.9cb80cbf73c47db24cfb400c1a9fcd68.svg",
+    "static/media/Withdraw.svg": "/static/media/Withdraw.999be9db1607c392433149b4b0b0b2d6.svg",
+    "static/media/Borrow.svg": "/static/media/Borrow.1841940a95883153081d8da5ac3e5449.svg",
+    "static/media/logo.svg": "/static/media/logo.5db729b0285b9b507ea7505652516675.svg",
     "static/media/holders.webp": "/static/media/holders.063170c140a088d29ef1.webp",
     "index.html": "/index.html",
-    "main.cf54e364.css.map": "/static/css/main.cf54e364.css.map",
-    "main.1410146a.js.map": "/static/js/main.1410146a.js.map",
+    "main.b606572b.css.map": "/static/css/main.b606572b.css.map",
+    "main.18e173e3.js.map": "/static/js/main.18e173e3.js.map",
     "787.28cb0dcd.chunk.js.map": "/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.cf54e364.css",
-    "static/js/main.1410146a.js"
+    "static/css/main.b606572b.css",
+    "static/js/main.18e173e3.js"
   ]
 }

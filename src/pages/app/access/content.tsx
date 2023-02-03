@@ -10,7 +10,7 @@ export default ({ data }: { data: { key: string; label: string } }) => {
   const handleClick = () => {
     if (!loading) {
       setLoading(true);
-      if (value && Number(value)) {
+      if (value) {
         Contract.access(value, data.key).then((res) => {
           setLoading(false);
         });
@@ -33,9 +33,7 @@ export default ({ data }: { data: { key: string; label: string } }) => {
         />
         <span className='text-detail'>
           You will receive approx. {""}
-          <span className='number'>
-            {value ? Contract.getRate() * Number(value) : "0.000"}
-          </span>{" "}
+          <span className='number'>{value ? Number(value) : "0.000"}</span>{" "}
           {data.key === "deposit" ? "FLE" : "FIL"}
         </span>
       </div>

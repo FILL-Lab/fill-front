@@ -25,8 +25,8 @@ const ForkTsCheckerWebpackPlugin =
     ? require('react-dev-utils/ForkTsCheckerWarningWebpackPlugin')
     : require('react-dev-utils/ForkTsCheckerWebpackPlugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-
 const createEnvironmentHash = require('./webpack/persistentCache/createEnvironmentHash');
+
 
 // Source maps are resource heavy and can cause out of memory issue for large source files.
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
@@ -334,6 +334,7 @@ module.exports = function (webpackEnv) {
         }),
         ...(modules.webpackAliases || {}),
         "@": paths.appSrc,
+       // ...stdLibBrowser,
       },
       plugins: [
         // Prevents users from importing files from outside of src/ (or node_modules/).
@@ -349,6 +350,8 @@ module.exports = function (webpackEnv) {
           babelRuntimeEntryHelpers,
           babelRuntimeRegenerator,
         ]),
+        //new NodeProtocolUrlPlugin(),
+       
       ],
     },
     module: {
@@ -604,6 +607,9 @@ module.exports = function (webpackEnv) {
             : undefined
         )
       ),
+       new webpack.ProvidePlugin({
+          Buffer: ['buffer', 'Buffer'],
+        }),
       // Inlines the webpack runtime script. This script is too small to warrant
       // a network request.
       // https://github.com/facebook/create-react-app/issues/5358
