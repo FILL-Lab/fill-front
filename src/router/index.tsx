@@ -8,6 +8,26 @@ export default () => {
   const dispath = useDispatch();
   useEffect(() => {
     const obj = JSON.parse(localStorage?.getItem("login") || "{}");
+
+    const handleAccountsChanged = (accounts: any, other: any) => {
+      const objValue = JSON.parse(localStorage?.getItem("login") || "{}");
+      if (
+        accounts?.length === 0 ||
+        (accounts.length > 0 &&
+          objValue?.result &&
+          objValue?.result.length > 0 &&
+          accounts[0] !== objValue?.result[0])
+      ) {
+        //退出登录
+        dispath({
+          type: "wallet/change",
+          payload: { show: true, wallet: undefined, result: undefined },
+        });
+        localStorage.removeItem("wallet");
+        window.location.reload();
+      }
+    };
+
     if (obj.result && obj.wallet) {
       dispath({
         type: "wallet/change",
@@ -16,19 +36,7 @@ export default () => {
         },
       });
     }
-  }, []);
 
-  useEffect(() => {
-    const handleAccountsChanged = (accounts: any, other: any) => {
-      console.log("===========3", accounts);
-      //   if (accounts.length === 0 || accounts[0] !== public_key) {
-      //     //退出登录
-      //     dispath({
-      //       type: "user/login",
-      //       payload: { cancel: true },
-      //     });
-      //   }
-    };
     if (window.ethereum) {
       window.ethereum.on("accountsChanged", handleAccountsChanged);
     } else {

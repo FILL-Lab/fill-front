@@ -100,7 +100,6 @@ class contract {
                     })
             }) 
         }
-        this.getMinerBorrow();
      }
     
     //存取
@@ -200,8 +199,9 @@ class contract {
     allBalance() { 
            this.myContract.methods.allBorrows().call( async (err:any, res:any) => { 
                if (!err) { 
-                const myBorrowList =[]
-                for (const item of res) { 
+                   const myBorrowList = []
+                                       console.log('=====2allBalance',res)
+                   for (const item of res) { 
                     const minerAdr = item.minerAddr;
                     if (this.minerList[minerAdr] && item.account.toLocaleLowerCase() === this.account) { 
                         const obj = {...item}

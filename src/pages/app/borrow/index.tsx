@@ -9,10 +9,11 @@ import Credit from "./Credit";
 import { useInterval } from "@/hooks/Interval";
 import Contract from "@/store/contract";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
+import { text } from "stream/consumers";
 
 export default () => {
   const wallet = useSelector((state: rootState) => state?.wallet, shallowEqual);
-
+  const intervalList: NodeJS.Timer[] = [];
   const contract = useSelector(
     (state: rootState) => state?.contract,
     shallowEqual
@@ -25,6 +26,12 @@ export default () => {
   const account = useMemo(() => {
     return getAccount(wallet);
   }, [wallet?.result]);
+
+  useEffect(() => {
+    if (account) {
+      Contract.getMinerBorrow();
+    }
+  }, [account]);
 
   useEffect(() => {
     if (contract.borrowList && borrowList.length > 0) {
@@ -54,6 +61,13 @@ export default () => {
     } else {
       setMinerList([]);
     }
+    return () => {
+      if (intervalList && intervalList.length > 0) {
+        intervalList.forEach((intervalListItem) => {
+          clearInterval(intervalListItem);
+        });
+      }
+    };
   }, [contract.borrowList]);
 
   const handleChange = (bool: boolean) => {
@@ -84,15 +98,12 @@ export default () => {
       ),
       width: "25%",
       unit: "FIL",
-      render: (text?: string, record?: any) => {
-        //  const value =getObligation(record.credit,)
+      render: (text?: string, record?: any, index?: number) => {
+        //const value = getObligation(record.credit);
         let showtext = text;
-        // useInterval(() => {
-        //   const timer =
-        //     Math.trunc(new Date().getTime() / 1000) - record.borrowTime;
-        //   showtext = getObligation(record.amount, record.interestRate, timer);
-        // }, 30000);
-        return <span>{showtext}</span>;
+        let key = `Obligation_${index}`;
+        //  console.log("====3", showtext);
+        return <span id={key}>{calcNum(record, key)}</span>;
       },
     },
     {
@@ -126,6 +137,20 @@ export default () => {
     },
   ];
 
+  const calcNum = (record: any, key: string) => {
+    let text = record.Obligation || "";
+    const timer = setInterval(() => {
+      const time = Math.trunc(new Date().getTime() / 1000) - record.borrowTime;
+      text = getObligation(record.amount, Contract.getRate(), time);
+      const dom = document.getElementById(key);
+      if (dom) {
+        dom.innerText = text;
+      }
+    }, 3000);
+    intervalList.push(timer);
+    return text;
+  };
+
   return (
     <div className='tabs-list app-card borrow-card'>
       <div className='title'>Borrow / Repay</div>
@@ -156,7 +181,8 @@ export default () => {
                         {headerItem?.render
                           ? headerItem?.render(
                               dataItem[headerItem.key],
-                              dataItem
+                              dataItem,
+                              index
                             )
                           : dataItem[headerItem.key]}
                         {headerItem.unit && (
