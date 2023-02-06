@@ -13,7 +13,6 @@ export default () => {
     <div className='fill-app'>
       <Header />
       <div className='main'>
-        {/* <div className='menu'>Dashbord</div> */}
         <div className='content'>
           <Account />
           <Chart />

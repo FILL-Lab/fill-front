@@ -6,10 +6,8 @@ import { useSelector, shallowEqual } from "react-redux";
 import { rootState } from "@/type";
 import { getAccount, getObligation, getValueDivide } from "@/utils";
 import Credit from "./Credit";
-import { useInterval } from "@/hooks/Interval";
 import Contract from "@/store/contract";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
-import { text } from "stream/consumers";
 
 export default () => {
   const wallet = useSelector((state: rootState) => state?.wallet, shallowEqual);
@@ -99,10 +97,7 @@ export default () => {
       width: "25%",
       unit: "FIL",
       render: (text?: string, record?: any, index?: number) => {
-        //const value = getObligation(record.credit);
-        let showtext = text;
         let key = `Obligation_${index}`;
-        //  console.log("====3", showtext);
         return <span id={key}>{calcNum(record, key)}</span>;
       },
     },

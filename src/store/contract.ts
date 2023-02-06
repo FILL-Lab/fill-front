@@ -37,7 +37,7 @@ class contract {
     getAccountBalance() {
         return this.accountBalance;
     }
-    // 获取利率
+    // get rate
     getInterestRate() { 
         this.myContract.methods.interestRate().call((err: any, res: any) => { 
             this.rate = getValueDivide(Number(res), 6)
@@ -100,7 +100,7 @@ class contract {
         }
      }
     
-    //存取
+    //access or  redeem
      access(value: string | number| BigNumber, type: string) { 
          const number = getValueMultiplied(Number(value), 18);
         const obj = type === 'deposit' ? {
@@ -120,11 +120,11 @@ class contract {
             }
             }).on('receipt', (data: any) => {
              console.log('receipt success', data)
-             // 存 或 取成功
+             // success
                 const typeStr = type === 'deposit' ? 'Deposit' : 'Redeem';
                 const notiStr = type === 'deposit' ? 'Deposit' : 'Redemption';
              const returnValue = data.events[typeStr].returnValues;
-             // 转变了多少的 FLE/FIL
+             // FLE/FIL
              const value = getValueDivide(Number(returnValue[2]), 18)
             notification.open({
                 message: "",
@@ -142,7 +142,7 @@ class contract {
     }
     
 
-    //借 还
+    // borrow or payback
     borrowPay(type: string, payloadList: Array<any>,repayNum:number|BigNumber) {
         return new Promise((resolve, reject) => { 
         this.myContract.methods[type](...payloadList).send({
@@ -154,10 +154,10 @@ class contract {
             }
         }).on('receipt', (data: any) => {
              console.log('borrow receipt success', data)
-             // 存 或 取成功
+             // success
              const typeStr = type === 'payback' ? 'Payback' : 'Borrow'
              const returnValue = data.events[typeStr].returnValues;
-             // 转变了多少的 FLE/FIL
+             //  FLE/FIL
              const value = getValueDivide(Number(returnValue[3]), 18)
             notification.open({
                 message: "",
@@ -175,7 +175,7 @@ class contract {
     
 
    
-    // 获取所有的借 和miner
+    // all borrow and miner
      getMinerBorrow() { 
         //let promiseArray: Array<any> = [];
          this.minerList = [];
@@ -184,7 +184,7 @@ class contract {
             if (!err) { 
                 res.forEach((item: string) => { 
                     if (item.startsWith('0x') && !item.endsWith('00') && item.length > 2) { 
-                        // 有意义的miner
+                        // main miner
                         this.minerList[item] = {
                             show:true
                         }
@@ -201,7 +201,7 @@ class contract {
            this.myContract.methods.allBorrows().call( async (err:any, res:any) => { 
                if (!err) { 
                    const myBorrowList = []
-                    console.log('=====2allBalance',res)
+                   // console.log('=====2allBalance',res)
                    for (const item of res) { 
                     const minerAdr = item.minerAddr;
                     if (this.minerList[minerAdr] && item.account.toLocaleLowerCase() === this.account && !item.isPayback) { 

@@ -2,7 +2,7 @@
  
 declare global {
     interface window {
-        DDLogin: any;//全局变量名
+        DDLogin: any;
     }
 }
 interface Window {
