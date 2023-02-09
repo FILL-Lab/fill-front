@@ -20,8 +20,9 @@ export function getValueDivide(num: number,pow:number =18,unit:number=6 ) {
   return res.toFixed(unit);
 }
 
-export function getValueMultiplied(num: number,pow:number =18) {
-  return new BigNumber(num).multipliedBy(Math.pow(10, pow));
+export function getValueMultiplied(num: number | string, pow: number = 18) {
+  
+  return new BigNumber(num).multipliedBy(Math.pow(10, pow)).toFixed(0);
 }
 
 export function getAccount(wallet:walletState) { 

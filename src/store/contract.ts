@@ -54,7 +54,6 @@ class contract {
                         new Promise((resolve) => {
                             web3.eth.getBalance(this.account).then((res) => {
                                 const balance = getValueDivide(Number(res), 18, 4)
-                                console.log('=====33',res,balance)
                                 this.accountBalance = res;
                                 store.dispatch({
                                             type: 'contract/change',
@@ -101,8 +100,8 @@ class contract {
      }
     
     //access or  redeem
-     access(value: string | number| BigNumber, type: string) { 
-         const number = getValueMultiplied(Number(value), 18);
+     access(value: string | number, type: string) { 
+         const number = getValueMultiplied(value, 18);
         const obj = type === 'deposit' ? {
             value:number
         } : {
@@ -115,7 +114,7 @@ class contract {
          },
             (err: any, res: any) => {
                 if (err) { 
-                  resolve(true);
+                resolve(true);
                 throw new Error(err);
             }
             }).on('receipt', (data: any) => {
