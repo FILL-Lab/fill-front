@@ -24,11 +24,11 @@ class contract {
     minerList: Record<string,any> = {};
     constructor() {
         
-        this.contractAbi = JSON.parse(JSON.stringify(Fill.abi));
-        this.contractAddress = '0x75AfF4881B535a5a363157ba7dBDA68f31EB9e25';
+        // this.contractAbi = JSON.parse(JSON.stringify(Fill.abi));
+        // this.contractAddress = '0x75AfF4881B535a5a363157ba7dBDA68f31EB9e25';
 
-        // this.contractAbi = JSON.parse(JSON.stringify(Fill1.output.abi));
-        // this.contractAddress = MarketPlaceContract || '0x935b696978f479234A0dA1Fc2F2a724CE1aBE8A0';
+        this.contractAbi = JSON.parse(JSON.stringify(Fill1.output.abi));
+        this.contractAddress = MarketPlaceContract || '0x935b696978f479234A0dA1Fc2F2a724CE1aBE8A0';
         this.myContract = new web3.eth.Contract(this.contractAbi, this.contractAddress);
         this.getInterestRate();
         this.contractBalance();
@@ -194,6 +194,20 @@ class contract {
             }).on('error', (err:any,res:any) => { 
                 console.log('======error======444',err,res)
             })
+     }
+    // unbind miner
+    unbindMiner(minerAddr:string) { 
+        this.myContract.methods.unbindMiner(minerAddr).send({ from: this.account,},(err: any, res: any) => {
+             if (err) { 
+                    console.log(err)
+               // resolve(true);
+                throw new Error(err);
+            }
+            }).on('receipt', (data: any) => {
+             console.log('unbindMiner receipt success', data)
+            }).on('error', (err:any,res:any) => { 
+                console.log('====unbindMiner==error======444',err,res)
+            })
     }
    
 
@@ -202,7 +216,8 @@ class contract {
         //let promiseArray: Array<any> = [];
          this.minerList = [];
         const acc = this.account;
-        this.myContract.methods.userMiners(acc).call((err:any, res:any) => { 
+         this.myContract.methods.userMiners(acc).call((err: any, res: any) => { 
+             console.log('=====4',res)
             if (!err) { 
                 res.forEach((item: string) => { 
                     if (item.startsWith('0x') && !item.endsWith('00') && item.length > 2) { 
@@ -220,22 +235,28 @@ class contract {
     
 
     allBalance() { 
-           this.myContract.methods.allBorrows().call( async (err:any, res:any) => { 
+        this.myContract.methods.allBorrows().call(async (err: any, res: any) => { 
                if (!err) { 
                    const myBorrowList = []
-                   // console.log('=====2allBalance',res)
-                   for (const item of res) { 
-                    const minerAdr = item.minerAddr;
-                    if (this.minerList[minerAdr] && item.account.toLocaleLowerCase() === this.account && !item.isPayback) { 
-                        const obj = {...item}
-                        const addrHex = item.minerAddr;
-                        const newAdree = fa.newAddress(0, utils.arrayify(utils.hexStripZeros(addrHex)));
-                        const filBalance = await this.callRpc("Filecoin.WalletBalance", [newAdree.toString()]); 
-                        obj.balanceData = filBalance;
-                        obj.miner_f = newAdree.toString();
-                         myBorrowList.push(obj)
-                        }
-                }
+                   const myMinerList = Object.keys(this.minerList) || [];
+                   
+                   if (myMinerList.length > 0) { 
+                       for (const mine of myMinerList) { 
+                        //    if(mine  ===  )
+                        for (const item of res) { 
+                            const minerAdr = item.minerAddr;
+                                if (this.minerList[minerAdr] && item.account.toLocaleLowerCase() === this.account && !item.isPayback) { 
+                                    const obj = {...item}
+                                    const addrHex = item.minerAddr;
+                                    const newAdree = fa.newAddress(0, utils.arrayify(utils.hexStripZeros(addrHex)));
+                                    const filBalance = await this.callRpc("Filecoin.WalletBalance", [newAdree.toString()]); 
+                                    obj.balanceData = filBalance;
+                                    obj.miner_f = newAdree.toString();
+                                    myBorrowList.push(obj)
+                                    }
+                            }
+                       }
+                
                 store.dispatch({
                     type: 'contract/change',
                     payload: {
@@ -243,6 +264,8 @@ class contract {
                         borrowList:myBorrowList
                     }
                 })
+                   } 
+              
             }
         })
     }

@@ -7,7 +7,7 @@ import Contract from "@/store/contract";
 
 export default () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [miner, setMiner] = useState("");
+  const [miner, setMiner] = useState("0x00a36b");
   const [signature, setSignature] = useState("");
   const getSigningMsg = () => {
     if (miner) {
@@ -21,8 +21,12 @@ export default () => {
   const handleMine = () => {
     Contract.bindMiner(
       "0x00a36b",
-      "0xa3c872184195159bcdeb55108992eba1bb2e1a75ff03e31404005de783eb3396d5ad412c9461d13b5d75f8a4af4a962a06fdd69b0bd325fe300a2d4ff3309148f9d94072731eafb7547bcfe4a3783e3286e9e25ffecb4b3dbbdcaccfeb87849f"
+      "0xaa7521a260bb22d5470f7813bfcced5dbc5e2edbd20f28611ba222c46f384866123d6e76076396596c08ed7b99a4d531021fa72f2225844af1aa1f119eab1c54325b9af0c613beb58464d539784d9ab73ddfeababece7ac36095bf5f062d2196"
     );
+  };
+
+  const handleUnbind = () => {
+    Contract.unbindMiner("0x00a36b");
   };
   return (
     <>
@@ -73,6 +77,7 @@ export default () => {
             }}
           />
         </div>
+        <Button onClick={handleUnbind}>解绑</Button>
       </Modal>
     </>
   );
