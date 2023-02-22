@@ -4,7 +4,12 @@ import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { Tooltip } from "antd";
 import { ITEM } from "./type";
 
-export const MarketPlaceContract = process.env.REACT_MARKET_CONTRACT || "";
+export const MarketPlaceContract =
+  process.env.REACT_MARKET_CONTRACT ||
+  "0x935b696978f479234A0dA1Fc2F2a724CE1aBE8A0";
+export const ValidationContract =
+  process.env.REACT_MARKET_VALIDATION ||
+  "0x715d890F377cDfE4eEFd4129dbAaF19e8b0e2Ea3";
 
 export const balancesList: Array<{
   key: "FIL" | "FLE";

@@ -1,0 +1,224 @@
+{
+	"compiler": {
+		"version": "0.8.17+commit.8df45f5f"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "bytes",
+						"name": "minerAddr",
+						"type": "bytes"
+					}
+				],
+				"name": "getSigningMsg",
+				"outputs": [
+					{
+						"internalType": "bytes",
+						"name": "",
+						"type": "bytes"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes",
+						"name": "minerAddr",
+						"type": "bytes"
+					},
+					{
+						"internalType": "bytes",
+						"name": "signature",
+						"type": "bytes"
+					},
+					{
+						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					}
+				],
+				"name": "validateOwner",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/Utils/Validation.sol": "Validation"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"@ensdomains/buffer/contracts/Buffer.sol": {
+			"keccak256": "0xd6dd3b0b327288f8e1b711a609f4040fea602e2ad4bba9febdf2f33b4e56eb0c",
+			"license": "BSD-2-Clause",
+			"urls": [
+				"bzz-raw://78a722152d40d778a97595e5224fac1d138f4e659dcb1a926148909ef4c4bdca",
+				"dweb:/ipfs/QmRxScF53x5ywsChLNpMUCdg2TSoCWTfo8G65Mo3sGY55b"
+			]
+		},
+		"@openzeppelin/contracts/utils/Strings.sol": {
+			"keccak256": "0xa4d1d62251f8574deb032a35fc948386a9b4de74b812d4f545a1ac120486b48a",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8c969013129ba9e651a20735ef659fef6d8a1139ea3607bd4b26ddea2d645634",
+				"dweb:/ipfs/QmVhVa6LGuzAcB8qgDtVHRkucn4ihj5UZr8xBLcJkP6ucb"
+			]
+		},
+		"@openzeppelin/contracts/utils/math/Math.sol": {
+			"keccak256": "0xa1e8e83cd0087785df04ac79fb395d9f3684caeaf973d9e2c71caef723a3a5d6",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://33bbf48cc069be677705037ba7520c22b1b622c23b33e1a71495f2d36549d40b",
+				"dweb:/ipfs/Qmct36zWXv3j7LZB83uwbg7TXwnZSN1fqHNDZ93GG98bGz"
+			]
+		},
+		"@zondax/filecoin-solidity/contracts/v0.8/AccountAPI.sol": {
+			"keccak256": "0x3285c24fb6c2cf875e315c8c721902180239fb6da52fcab191b30bae346f722a",
+			"license": "Apache-2.0",
+			"urls": [
+				"bzz-raw://60bc8ee74ce6027b997fe0ad92d33e5a34c7ba16132c95c758d406a5ac43f7a1",
+				"dweb:/ipfs/QmTo6cLy5nUy1bpsNU4cUS4REA4XBwYAVWoqaokhTp1BaN"
+			]
+		},
+		"@zondax/filecoin-solidity/contracts/v0.8/MinerAPI.sol": {
+			"keccak256": "0x2c32b31b8c0f406a6e51b798246a302b465ca4f4584504b532b47faa1629a03c",
+			"license": "Apache-2.0",
+			"urls": [
+				"bzz-raw://9e30e14f473248595b2ba49c0911a3b4a17de2ac375c0f06e54a05a08618de8a",
+				"dweb:/ipfs/QmbMhoAjHz4CpG6uuCBfwiRdun1oEb69Uq9oJdoA1HhEXW"
+			]
+		},
+		"@zondax/filecoin-solidity/contracts/v0.8/cbor/AccountCbor.sol": {
+			"keccak256": "0xf5d7140029261f5ac10c4f7b35a2e70a51e355567e7850d6e2800bc2d621b6a9",
+			"license": "Apache-2.0",
+			"urls": [
+				"bzz-raw://7a4a0a76b443ce1cea296808fa0d0ee37701591fd4d10a477aef8161c31d51f1",
+				"dweb:/ipfs/QmaQrCkyUbUTayXPAuKZKWCk6kb7q7feJwniAZv44Ce3GA"
+			]
+		},
+		"@zondax/filecoin-solidity/contracts/v0.8/cbor/BigIntCbor.sol": {
+			"keccak256": "0xb9ac17884805d6b4f40a44117fb54e2413457fc720db10face70ad8f46cac14e",
+			"license": "Apache-2.0",
+			"urls": [
+				"bzz-raw://ab6344e5f294a8606d7f233f88f29a1dd49ec1c4e2d5a8f5a752f8221cf331ac",
+				"dweb:/ipfs/QmdGcsFDiHwpeCfjggbZdNKq931x1iQyXJa8i3eTmWwXtT"
+			]
+		},
+		"@zondax/filecoin-solidity/contracts/v0.8/cbor/BytesCbor.sol": {
+			"keccak256": "0xe844a226cc0c24aecc5d759948b5663f5c5aa5b6bcb2a40a19075b58976335fa",
+			"license": "Apache-2.0",
+			"urls": [
+				"bzz-raw://c06f69a25ecfee42a7cfe4e395254b7ec01ab9e73302e51184e3b6f4909b0c9c",
+				"dweb:/ipfs/QmX8bKsx9iJyCpzSbmDqUUpXXZFYLXGus9J7aLdNtQF2N7"
+			]
+		},
+		"@zondax/filecoin-solidity/contracts/v0.8/cbor/MinerCbor.sol": {
+			"keccak256": "0xf31a680e6e9ac4e1a7cb795fa697f382b2a30480abf8d7c9f2c3475253549a3d",
+			"license": "Apache-2.0",
+			"urls": [
+				"bzz-raw://abb6bf76893e22a9402df0fec466af3be46887384a9ddd8b56fa1b9f00e79818",
+				"dweb:/ipfs/QmWLq9GfrqgrG3641N727w9ujbJarSf8eCDQXFUiJkjdKk"
+			]
+		},
+		"@zondax/filecoin-solidity/contracts/v0.8/types/AccountTypes.sol": {
+			"keccak256": "0x5691806d073e64f5c840312152b6c447b3e29a82311977f05b5cc65d7d3e8ab3",
+			"license": "Apache-2.0",
+			"urls": [
+				"bzz-raw://23f37fabceb9710129cc09b230325d926055eaba7f3764739a9357190cac856f",
+				"dweb:/ipfs/QmVEGZRQ65XaweDTEdsYFNstLLgHtePQH324f2EUzXK9Y9"
+			]
+		},
+		"@zondax/filecoin-solidity/contracts/v0.8/types/CommonTypes.sol": {
+			"keccak256": "0xf3b38b940ae83500fed3000adfaccb7bc82d0536eac882bfff844147953cf297",
+			"license": "Apache-2.0",
+			"urls": [
+				"bzz-raw://83fa1cf19fc63934884f73f2a48649ac52638fb2c09c2c13dbc8a6cbc841246c",
+				"dweb:/ipfs/Qmf9SvikXpTrJ2WzoQdrPUwwiefxHWnA7p5a7vdsHEjqjM"
+			]
+		},
+		"@zondax/filecoin-solidity/contracts/v0.8/types/MinerTypes.sol": {
+			"keccak256": "0xdea83a3a71ea19fe3e2b1bf4aec554aecf51f9b5d858f4b2246d26a960f2a1e3",
+			"license": "Apache-2.0",
+			"urls": [
+				"bzz-raw://60b72c17d8462fccaf96ff97ad06f255604b9517faf9e81241cb3cb1b9decf6f",
+				"dweb:/ipfs/QmSKcwmuEwmbEefskveS3NKH7HiJu52MXks46XrSoovccd"
+			]
+		},
+		"@zondax/filecoin-solidity/contracts/v0.8/utils/Actor.sol": {
+			"keccak256": "0xa62dd4e45ae93f1a6eeea036353563ab603a996653fac7d97466bea0865f7eba",
+			"license": "Apache-2.0",
+			"urls": [
+				"bzz-raw://1a2784eba1f80a91aca241ae99c9528ef608ec698ddd17aa1b3f6b9d87e9cff8",
+				"dweb:/ipfs/Qmb2XtV5JNdQaVvexcaRqnAm6MXuqcMdpnHvxjbCTa98rA"
+			]
+		},
+		"@zondax/filecoin-solidity/contracts/v0.8/utils/CborDecode.sol": {
+			"keccak256": "0x024d6024df4cd544fa3ac35013ed811871550b3fbb512f44071726c865be8032",
+			"license": "Apache-2.0",
+			"urls": [
+				"bzz-raw://6a62412d25176e4f16b237414827c531a0569c149e8d771ede688de1138bed5d",
+				"dweb:/ipfs/QmNu5hU9gewd5gnpj2FMf3rc4dnm2yi8gm31rdwVqFZrdv"
+			]
+		},
+		"@zondax/filecoin-solidity/contracts/v0.8/utils/Misc.sol": {
+			"keccak256": "0x33d935de97f6fa3e629ad4a9deafd74b9ae081675475f60573499002bf3fb961",
+			"license": "Apache-2.0",
+			"urls": [
+				"bzz-raw://4b905706dd83d77ced169cfe3b57c139c29f6c29d32497022d1198f78eedad9d",
+				"dweb:/ipfs/QmVqkhuoGLUq5Pnv1FTjRtb7REbHwYtF6tMV6JY6RyY4Ke"
+			]
+		},
+		"contracts/Utils/Context.sol": {
+			"keccak256": "0xba6ddba08488c0fd0249ecbf73d94db554b664e5460e05335633d38988fb1947",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8d39e2090185cd7852447d004adb908b40e2c7adc8831ee1a7d6eb6dea664ddc",
+				"dweb:/ipfs/QmQZPEkHcJ8hbEbRr8vvUrCWPs7XRBmwLXbUQc9Mmx39Lx"
+			]
+		},
+		"contracts/Utils/Validation.sol": {
+			"keccak256": "0x22466d558ee5e801bddb07734b46826a2b866fca7d7c0587db9faa1f172635b6",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://c27ad8a13a4ff97421b3bf2cb4484b8423676c3027cb35aa3e738285e99a9cb8",
+				"dweb:/ipfs/Qmf7mST7qQthF6iPRvkQWw9g7f5ZWhTyWH7xQJCRKb5pw9"
+			]
+		},
+		"solidity-cborutils/contracts/CBOR.sol": {
+			"keccak256": "0xe03d8889bf66e7a30e8010b022b6c86ad0f8c19764cc6c7f50b6bb4ad860cb9b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://bbcfc16dda4f5785938acce3f6733a2a27fbcc7451da05e46e5493907c1bb790",
+				"dweb:/ipfs/QmTk1okPxoUykGuXPH3zD1LB57FwPuGbgYmViXXJtuYMUQ"
+			]
+		}
+	},
+	"version": 1
+}

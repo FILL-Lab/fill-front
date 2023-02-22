@@ -2,6 +2,8 @@ import { getValueDivide, getValueMultiplied } from '@/utils';
 import Web3 from 'web3';
 import { balancesList, MarketPlaceContract } from '@/app_contants';
 import Fill from '@/server/FILL.json'
+import Fill1 from '@/server/FILL_metadata.json';
+
 import store from './modules'
 import { notification } from 'antd';
 import { BigNumber, utils } from "ethers";
@@ -21,8 +23,12 @@ class contract {
     myBorrowList: Array<any> =[];
     minerList: Record<string,any> = {};
     constructor() {
+        
         this.contractAbi = JSON.parse(JSON.stringify(Fill.abi));
-        this.contractAddress = MarketPlaceContract || '0x75AfF4881B535a5a363157ba7dBDA68f31EB9e25';
+        this.contractAddress = '0x75AfF4881B535a5a363157ba7dBDA68f31EB9e25';
+
+        // this.contractAbi = JSON.parse(JSON.stringify(Fill1.output.abi));
+        // this.contractAddress = MarketPlaceContract || '0x935b696978f479234A0dA1Fc2F2a724CE1aBE8A0';
         this.myContract = new web3.eth.Contract(this.contractAbi, this.contractAddress);
         this.getInterestRate();
         this.contractBalance();
@@ -173,7 +179,24 @@ class contract {
     }
     
 
+    // add miner
+     bindMiner(minerAddr:string,signature:string) { 
+         this.myContract.methods.bindMiner(minerAddr, signature).send({
+              from: this.account,
+         }, (err: any, res: any) => {
+             if (err) { 
+                    console.log(err)
+               // resolve(true);
+                throw new Error(err);
+            }
+            }).on('receipt', (data: any) => {
+             console.log('receipt success', data)
+            }).on('error', (err:any,res:any) => { 
+                console.log('======error======444',err,res)
+            })
+    }
    
+
     // all borrow and miner
      getMinerBorrow() { 
         //let promiseArray: Array<any> = [];

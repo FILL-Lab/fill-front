@@ -8,6 +8,7 @@ import { getAccount, getObligation, getValueDivide } from "@/utils";
 import Credit from "./Credit";
 import Contract from "@/store/contract";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
+import AddMiner from "./AddMiner";
 
 export default () => {
   const wallet = useSelector((state: rootState) => state?.wallet, shallowEqual);
@@ -194,7 +195,7 @@ export default () => {
       ) : (
         <NoData />
       )}
-      {account && <div className='miner-btn'>Add Miner</div>}
+      {account && <AddMiner />}
       <Credit
         show={show}
         onChange={handleChange}
