@@ -161,7 +161,7 @@
 						"type": "uint64"
 					}
 				],
-				"name": "StackingMiner",
+				"name": "StakingMiner",
 				"type": "event"
 			},
 			{
@@ -192,63 +192,8 @@
 						"type": "uint64"
 					}
 				],
-				"name": "UnstackingMiner",
+				"name": "UnstakingMiner",
 				"type": "event"
-			},
-			{
-				"inputs": [],
-				"name": "allBorrows",
-				"outputs": [
-					{
-						"components": [
-							{
-								"internalType": "uint256",
-								"name": "id",
-								"type": "uint256"
-							},
-							{
-								"internalType": "address",
-								"name": "account",
-								"type": "address"
-							},
-							{
-								"internalType": "uint256",
-								"name": "amount",
-								"type": "uint256"
-							},
-							{
-								"internalType": "bytes",
-								"name": "minerAddr",
-								"type": "bytes"
-							},
-							{
-								"internalType": "uint256",
-								"name": "interestRate",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "borrowTime",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "paybackTime",
-								"type": "uint256"
-							},
-							{
-								"internalType": "bool",
-								"name": "isPayback",
-								"type": "bool"
-							}
-						],
-						"internalType": "struct FILLInterface.BorrowInfo[]",
-						"name": "",
-						"type": "tuple[]"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
 			},
 			{
 				"inputs": [
@@ -496,7 +441,7 @@
 						"type": "bytes"
 					}
 				],
-				"name": "getStackMinerInfo",
+				"name": "getStakingMinerInfo",
 				"outputs": [
 					{
 						"components": [
@@ -526,7 +471,7 @@
 								"type": "uint64"
 							}
 						],
-						"internalType": "struct FILLInterface.MinerStackInfo",
+						"internalType": "struct FILLInterface.MinerStakingInfo",
 						"name": "",
 						"type": "tuple"
 					}
@@ -551,7 +496,66 @@
 				"inputs": [
 					{
 						"internalType": "bytes",
-						"name": "minerAddress",
+						"name": "",
+						"type": "bytes"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "minerBorrows",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "minerAddr",
+						"type": "bytes"
+					},
+					{
+						"internalType": "uint256",
+						"name": "interestRate",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "borrowTime",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "paybackTime",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "isPayback",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes",
+						"name": "minerAddr",
 						"type": "bytes"
 					},
 					{
@@ -683,7 +687,7 @@
 						"type": "bytes"
 					}
 				],
-				"name": "stackingMiner",
+				"name": "stakingMiner",
 				"outputs": [
 					{
 						"internalType": "bool",
@@ -721,7 +725,7 @@
 						"type": "bytes"
 					}
 				],
-				"name": "unstackingMiner",
+				"name": "unstakingMiner",
 				"outputs": [
 					{
 						"internalType": "bool",
@@ -745,47 +749,59 @@
 					{
 						"components": [
 							{
-								"internalType": "uint256",
-								"name": "id",
-								"type": "uint256"
-							},
-							{
-								"internalType": "address",
-								"name": "account",
-								"type": "address"
-							},
-							{
-								"internalType": "uint256",
-								"name": "amount",
-								"type": "uint256"
-							},
-							{
 								"internalType": "bytes",
 								"name": "minerAddr",
 								"type": "bytes"
 							},
 							{
-								"internalType": "uint256",
-								"name": "interestRate",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "borrowTime",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "paybackTime",
-								"type": "uint256"
-							},
-							{
-								"internalType": "bool",
-								"name": "isPayback",
-								"type": "bool"
+								"components": [
+									{
+										"internalType": "uint256",
+										"name": "id",
+										"type": "uint256"
+									},
+									{
+										"internalType": "address",
+										"name": "account",
+										"type": "address"
+									},
+									{
+										"internalType": "uint256",
+										"name": "amount",
+										"type": "uint256"
+									},
+									{
+										"internalType": "bytes",
+										"name": "minerAddr",
+										"type": "bytes"
+									},
+									{
+										"internalType": "uint256",
+										"name": "interestRate",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "borrowTime",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "paybackTime",
+										"type": "uint256"
+									},
+									{
+										"internalType": "bool",
+										"name": "isPayback",
+										"type": "bool"
+									}
+								],
+								"internalType": "struct FILLInterface.BorrowInfo[]",
+								"name": "borrows",
+								"type": "tuple[]"
 							}
 						],
-						"internalType": "struct FILLInterface.BorrowInfo[]",
+						"internalType": "struct FILLInterface.MinerBorrowInfo[]",
 						"name": "",
 						"type": "tuple[]"
 					}
@@ -863,20 +879,30 @@
 						"_0": "user’s FLE account balance"
 					}
 				},
-				"getStackMinerInfo(bytes)": {
-					"details": "get stacking miner info : minerAddr,quota,borrowCount,paybackCount,expiration",
+				"getStakingMinerInfo(bytes)": {
+					"details": "get staking miner info : minerAddr,quota,borrowCount,paybackCount,expiration",
 					"params": {
 						"minerAddr": "miner address"
 					},
 					"returns": {
-						"_0": "info return stacking miner info"
+						"_0": "info return staking miner info"
 					}
 				},
 				"interestRate()": {
 					"details": "return borrowing interest rate : a mathematical function of utilizatonRate"
 				},
-				"stackingMiner(bytes)": {
-					"details": "stacking miner : change beneficiary to contract , need owner for miner propose change beneficiary first",
+				"payback(bytes,uint256)": {
+					"details": "payback principal and interest",
+					"params": {
+						"borrowId": "borrow id",
+						"minerAddr": "miner address"
+					},
+					"returns": {
+						"_0": "actual FIL repaid"
+					}
+				},
+				"stakingMiner(bytes)": {
+					"details": "staking miner : change beneficiary to contract , need owner for miner propose change beneficiary first",
 					"params": {
 						"minerAddr": "miner address"
 					},
@@ -884,8 +910,8 @@
 						"_0": "flag result flag for change beneficiary"
 					}
 				},
-				"unstackingMiner(bytes)": {
-					"details": "unstacking miner : change beneficiary back to miner owner, need payback all first",
+				"unstakingMiner(bytes)": {
+					"details": "unstaking miner : change beneficiary back to miner owner, need payback all first",
 					"params": {
 						"minerAddr": "miner address"
 					},
@@ -927,8 +953,8 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
-			"runs": 200
+			"enabled": true,
+			"runs": 20000
 		},
 		"remappings": []
 	},
@@ -1078,11 +1104,11 @@
 			]
 		},
 		"contracts/FILL.sol": {
-			"keccak256": "0x4a0cdd9e92f320e94f7b2ea5a866552484ee9a472ec4647b019aad8e41da3c3c",
+			"keccak256": "0x6e89dc91125d7eb580ad306d476ecf0847796f4e47f72ec9a7867a1e5f726d8d",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://aec15f28e62ae711b93a098193afd50ed50169bac2bf8e9bfc82b49f65a233da",
-				"dweb:/ipfs/QmU1YahxqS44JyV5VMAYtRXAtyDw2ASQAUuQcz62kL41v8"
+				"bzz-raw://86befa6c7d011295674bf356afd617fb4d72a4aee46ba774f255092ed42f91dc",
+				"dweb:/ipfs/QmYfw68vv4ULPRjEoSVAq4U7CUyFxSApJeY4SApfNXZPtr"
 			]
 		},
 		"contracts/FLE.sol": {

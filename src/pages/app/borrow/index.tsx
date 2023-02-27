@@ -33,21 +33,18 @@ export default () => {
   }, [account]);
 
   useEffect(() => {
-    if (contract.borrowList && borrowList.length > 0) {
+    if (contract.minerList) {
       const data: any = [];
-      contract.borrowList.forEach((minerData: any) => {
+      contract.minerList.forEach((minerData: any) => {
         const timer =
           Math.trunc(new Date().getTime() / 1000) - minerData.borrowTime;
-        //console.log("-timer---3", minerData);
         const obj = {
           miner: minerData.minerAddr,
           miner_f: minerData.miner_f,
           credit: getValueDivide(minerData?.balanceData?.result),
-          Obligation: getObligation(
-            minerData.amount,
-            Contract.getRate(),
-            timer
-          ),
+          Obligation: minerData.amount
+            ? getObligation(minerData.amount, Contract.getRate(), timer)
+            : "- -",
           balanceData: minerData?.balanceData,
           borrowTime: minerData.borrowTime,
           interestRate: minerData.interestRate,
@@ -67,7 +64,7 @@ export default () => {
         });
       }
     };
-  }, [contract.borrowList]);
+  }, [contract.minerList]);
 
   const handleChange = (bool: boolean) => {
     setShow(bool);
@@ -109,6 +106,13 @@ export default () => {
       render: (text?: string, record?: any) => {
         return (
           <div className='edit'>
+            <Button
+              className='fill-btn-border'
+              onClick={() => {
+                Contract.stakingMiner(record.miner);
+              }}>
+              staking
+            </Button>
             <Button
               className='fill-btn'
               onClick={() => {

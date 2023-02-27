@@ -35,7 +35,7 @@ export default (props: Props) => {
   }, [contract?.contractBalance, contract?.contractBalanceRes]);
 
   // const balance =
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
     if (!loading) {
       setLoading(true);
       const type = title === "Repayment" ? "payback" : "borrow";

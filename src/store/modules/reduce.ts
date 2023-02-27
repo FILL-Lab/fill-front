@@ -30,7 +30,7 @@ const contractSlice = createSlice({
         borrowList:[]
     },
     reducers: {
-        change: (state:contractState, action) => {
+      change: (state: contractState, action) => {
             return { ...state, ...action.payload }
         },
       

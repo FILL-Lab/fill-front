@@ -9,10 +9,11 @@ import { notification } from 'antd';
 import { BigNumber, utils } from "ethers";
 import axios from 'axios';
 import fa from "@glif/filecoin-address";
+//import { ethers } from 'ethers';
 
 const web3 = new Web3(window.ethereum);
 //const request= util.promisify(requests);
-
+   // const provider = new ethers.providers.Web3Provider(window.ethereum)
 class contract {
     contractAbi: any;
     contractAddress: string;
@@ -23,13 +24,15 @@ class contract {
     myBorrowList: Array<any> =[];
     minerList: Record<string,any> = {};
     constructor() {
-        
+             //   const signer = provider.getSigner()
         // this.contractAbi = JSON.parse(JSON.stringify(Fill.abi));
         // this.contractAddress = '0x75AfF4881B535a5a363157ba7dBDA68f31EB9e25';
 
         this.contractAbi = JSON.parse(JSON.stringify(Fill1.output.abi));
-        this.contractAddress = MarketPlaceContract || '0x935b696978f479234A0dA1Fc2F2a724CE1aBE8A0';
+        this.contractAddress = MarketPlaceContract;
         this.myContract = new web3.eth.Contract(this.contractAbi, this.contractAddress);
+        //this.myContract_e=  new ethers.Contract(this.contractAddress,this.contractAbi,signer)
+
         this.getInterestRate();
         this.contractBalance();
     }
@@ -81,6 +84,7 @@ class contract {
                                         })
                                     resolve(fleBalance)
                                 } else {
+                                    console.log('FLE====3',err)
                                     return 'error'
                                 }
                                 
@@ -106,13 +110,13 @@ class contract {
      }
     
     //access or  redeem
-     access(value: string | number, type: string) { 
+     async access(value: string | number, type: string) { 
          const number = getValueMultiplied(value, 18);
         const obj = type === 'deposit' ? {
             value:number
         } : {
-
-        }
+            }
+  
         return new Promise((resolve, reject) => { 
              this.myContract.methods[type](number,1,1).send({
                  from: this.account,
@@ -147,9 +151,33 @@ class contract {
     }
     
 
+
+    // stakingMiner
+   async stakingMiner(miner: string) { 
+          this.myContract.methods.stakingMiner(miner).send({from: this.account},(err: any, res: any) => {
+             if (err) { 
+                console.log(err)
+                throw new Error(err);
+            }
+            }).on('receipt', (data: any) => {
+                console.log('receipt stakingMiner success', data)
+                notification.open({
+                message: "",
+                description: `Successfully Staking Miner`,
+                duration: 10,
+                className: "app-notic",
+            });
+            }).on('error', (err:any,res:any) => { 
+                console.log('==stakingMiner====error======444',err,res)
+            })
+
+    }
+
     // borrow or payback
-    borrowPay(type: string, payloadList: Array<any>,repayNum:number|BigNumber) {
+    async borrowPay(type: string, payloadList: Array<any>, repayNum: number | BigNumber) { 
+       
         return new Promise((resolve, reject) => { 
+            
         this.myContract.methods[type](...payloadList).send({
                  from: this.account,
         }, (err: any, res: any) => { 
@@ -180,7 +208,7 @@ class contract {
     
 
     // add miner
-     bindMiner(minerAddr:string,signature:string) { 
+    bindMiner(minerAddr: string, signature: string) { 
          this.myContract.methods.bindMiner(minerAddr, signature).send({
               from: this.account,
          }, (err: any, res: any) => {
@@ -191,8 +219,9 @@ class contract {
             }
             }).on('receipt', (data: any) => {
              console.log('receipt success', data)
-            }).on('error', (err:any,res:any) => { 
-                console.log('======error======444',err,res)
+            }).on('error', (err: any, res: any) => { 
+                                throw new Error(err);
+
             })
      }
     // unbind miner
@@ -206,7 +235,7 @@ class contract {
             }).on('receipt', (data: any) => {
              console.log('unbindMiner receipt success', data)
             }).on('error', (err:any,res:any) => { 
-                console.log('====unbindMiner==error======444',err,res)
+             throw new Error(err);
             })
     }
    
@@ -216,18 +245,48 @@ class contract {
         //let promiseArray: Array<any> = [];
          this.minerList = [];
         const acc = this.account;
-         this.myContract.methods.userMiners(acc).call((err: any, res: any) => { 
-             console.log('=====4',res)
-            if (!err) { 
-                res.forEach((item: string) => { 
-                    if (item.startsWith('0x') && !item.endsWith('00') && item.length > 2) { 
-                        // main miner
-                        this.minerList[item] = {
-                            show:true
-                        }
+         this.myContract.methods.userBorrows(acc).call(async (err: any, res: any) => { 
+             console.log('miner---', res)
+             if (!err) { 
+                const minerList =[]
+                 for (const item of res) { 
+                     let isPayback = false;
+                     if (item.borrows && item.borrows.length > 0) { 
+                         for (const itemBorrw of item.borrows) {
+                             if (!itemBorrw.isPayback) {
+                                 const obj = { ...itemBorrw }
+                                 const addrHex = item.minerAddr;
+                                 const newAdree = fa.newAddress(0, utils.arrayify(utils.hexStripZeros(addrHex)));
+                                 const filBalance = await this.callRpc("Filecoin.WalletBalance", [newAdree.toString()]);
+                                 obj.balanceData = filBalance;
+                                 obj.miner_f = newAdree.toString();
+                                 minerList.push(obj)
+                             } else { 
+                                 isPayback= true
+                             }
+                         }
+                         
+                     }
+                     if (!isPayback) { 
+                        const obj = {...item}
+                        const addrHex = item.minerAddr;
+                        const newAdree = fa.newAddress(0, utils.arrayify(utils.hexStripZeros(addrHex)));
+                        const filBalance = await this.callRpc("Filecoin.WalletBalance", [newAdree.toString()]); 
+                        obj.balanceData = filBalance;
+                         obj.miner_f = newAdree.toString();
+                    minerList.push(obj)
+                                    }
+                            }
+                 
+                 this.minerList = minerList;
+                   store.dispatch({
+                    type: 'contract/change',
+                    payload: {
+                        minerList: this.minerList,
+                        borrowList:[]
                     }
-                    this.allBalance();
                 })
+             
                
             }
         })
@@ -272,7 +331,7 @@ class contract {
 
 
     contractBalance() { 
-        web3.eth.getBalance(this.contractAddress ).then((res:any) => { 
+        web3.eth.getBalance(this.contractAddress).then((res: any) => { 
             if (res) { 
                 store.dispatch({
                     type: 'contract/change',

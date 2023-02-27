@@ -6,7 +6,7 @@ import { ITEM } from "./type";
 
 export const MarketPlaceContract =
   process.env.REACT_MARKET_CONTRACT ||
-  "0x935b696978f479234A0dA1Fc2F2a724CE1aBE8A0";
+  "0x8426ccfe6D9524742fc4755EF4E54B674543bD1E";
 export const ValidationContract =
   process.env.REACT_MARKET_VALIDATION ||
   "0x715d890F377cDfE4eEFd4129dbAaF19e8b0e2Ea3";
